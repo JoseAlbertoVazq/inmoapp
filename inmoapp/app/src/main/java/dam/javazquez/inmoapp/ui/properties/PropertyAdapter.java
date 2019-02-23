@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import dam.javazquez.inmoapp.R;
 import dam.javazquez.inmoapp.ui.properties.PropertyFragment.OnListFragmentInteractionListener;
 import dam.javazquez.inmoapp.ui.properties.dummy.DummyContent.DummyItem;
 

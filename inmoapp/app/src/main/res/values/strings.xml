@@ -2,8 +2,9 @@
     <string name="app_name">InmoApp</string>
     <string name="title_activity_dashboard">InmoApp</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_favs">Favourites</string>
+    <string name="title_mylist">My Properties</string>
+    <string name="title_login">Login</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="sharedpreferences_filename">login</string>
