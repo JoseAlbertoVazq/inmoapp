@@ -26,14 +26,14 @@ public class DashboardActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        mTextMessage.setText(R.string.title_home);
+                      //  mTextMessage.setText(R.string.title_home);
                         return true;
 
                     case R.id.navigation_favs:
-                        mTextMessage.setText(R.string.title_favs);
+                        //mTextMessage.setText(R.string.title_favs);
                         return true;
                     case R.id.navigation_mylist:
-                        mTextMessage.setText(R.string.title_mylist);
+                        //mTextMessage.setText(R.string.title_mylist);
                         return true;
 
                 }
@@ -42,11 +42,11 @@ public class DashboardActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        mTextMessage.setText(R.string.title_home);
+                    //    mTextMessage.setText(R.string.title_home);
                         return true;
 
                     case R.id.navigation_login:
-                        mTextMessage.setText(R.string.title_login);
+                  //      mTextMessage.setText(R.string.title_login);
                         startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
                         return true;
                 }

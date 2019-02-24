@@ -1,28 +1,35 @@
 package dam.javazquez.inmoapp.ui.properties;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import org.w3c.dom.Text;
+
 import dam.javazquez.inmoapp.R;
+import dam.javazquez.inmoapp.responses.PhotoResponse;
+import dam.javazquez.inmoapp.responses.PropertyResponse;
 import dam.javazquez.inmoapp.ui.properties.PropertyFragment.OnListFragmentInteractionListener;
-import dam.javazquez.inmoapp.ui.properties.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
+ *
  */
 public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHolder> {
-
-    private final List<DummyItem> mValues;
+    private PhotoResponse photo;
+    private final List<PropertyResponse> mValues;
     private final OnListFragmentInteractionListener mListener;
+    Context ctx;
 
-    public PropertyAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+
+    public PropertyAdapter(Context ctx, List<PropertyResponse> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -37,8 +44,11 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.title.setText(mValues.get(position).getTitle());
+        holder.price.setText(String.valueOf(mValues.get(position).getPrice()));
+        holder.size.setText(String.valueOf(mValues.get(position).getSize()));
+        holder.city.setText(mValues.get(position).getCity());
+        Glide.with(holder.mView).load("https://imgur.com/RtGWDaA").into(holder.photo);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,20 +69,22 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final TextView title;
+        public final TextView price;
+        public final TextView size;
+        public final TextView city;
+        public final ImageView photo;
+        public PropertyResponse mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            title = view.findViewById(R.id.title);
+            price = view.findViewById(R.id.price);
+            size = view.findViewById(R.id.size);
+            city = view.findViewById(R.id.city);
+            photo = view.findViewById(R.id.photo);
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
-        }
     }
 }

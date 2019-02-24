@@ -2,6 +2,7 @@ package dam.javazquez.inmoapp.responses;
 
 public class PropertyResponse {
 
+    private String id;
     private String ownerId;
     private String title;
     private String description;
@@ -32,6 +33,15 @@ public class PropertyResponse {
         this.city = city;
         this.province = province;
         this.loc = loc;
+    }
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getOwnerId() {
