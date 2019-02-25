@@ -79,7 +79,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <ImageView
-        android:id="@+id/favPrincipal"
+        android:id="@+id/favFavs"
         android:layout_width="52dp"
         android:layout_height="46dp"
         android:layout_marginStart="8dp"
