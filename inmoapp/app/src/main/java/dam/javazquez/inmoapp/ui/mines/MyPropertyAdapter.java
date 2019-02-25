@@ -1,22 +1,33 @@
 package dam.javazquez.inmoapp.ui.mines;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import dam.javazquez.inmoapp.R;
 import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
 import dam.javazquez.inmoapp.responses.PropertyResponse;
+import dam.javazquez.inmoapp.retrofit.generator.AuthType;
+import dam.javazquez.inmoapp.retrofit.generator.ServiceGenerator;
 import dam.javazquez.inmoapp.retrofit.services.PropertyService;
+import dam.javazquez.inmoapp.ui.common.DashboardActivity;
+import dam.javazquez.inmoapp.ui.login.LoginActivity;
 import dam.javazquez.inmoapp.ui.mines.MyPropertyFragment.OnListFragmentInteractionListener;
-import dam.javazquez.inmoapp.ui.mines.dummy.DummyContent.DummyItem;
 import dam.javazquez.inmoapp.util.UtilToken;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import java.util.List;
 
@@ -64,6 +75,42 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.Vi
                 mListener.onListFragmentInteraction(holder.mItem);
             }
         });
+
+        holder.delete.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
+            builder.setTitle(R.string.title_add).setMessage(R.string.message_delete);
+            builder.setPositiveButton(R.string.go, (dialog, which) ->
+                    deleteProperty(holder));
+            builder.setNegativeButton(R.string.cancel, (dialog, id) -> {
+                Log.d("Back", "Going back");
+            });
+            AlertDialog dialog = builder.create();
+
+            dialog.show();
+
+        });
+    }
+
+    public void deleteProperty(final ViewHolder holder) {
+        String id = holder.mItem.getId();
+        System.out.println(id);
+        service = ServiceGenerator.createService(PropertyService.class, jwt, AuthType.JWT);
+        Call<PropertyFavsResponse> callDelete = service.delete(id);
+        callDelete.enqueue(new Callback<PropertyFavsResponse>() {
+            @Override
+            public void onResponse(Call<PropertyFavsResponse> call, Response<PropertyFavsResponse> response) {
+                if(response.code() == 200 || response.code() == 204) {
+                    Toast.makeText(contexto, "Property deleted", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(contexto, "Error while deleting", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PropertyFavsResponse> call, Throwable t) {
+                Toast.makeText(contexto, "Failure", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -78,6 +125,8 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.Vi
         public final TextView size;
         public final TextView city;
         public final ImageView photo;
+        public final ImageButton edit;
+        public final ImageButton delete;
         public PropertyFavsResponse mItem;
 
         public ViewHolder(View view) {
@@ -88,7 +137,8 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.Vi
             size = view.findViewById(R.id.size);
             city = view.findViewById(R.id.city);
             photo = view.findViewById(R.id.photo);
-
+            edit = view.findViewById(R.id.editButton);
+            delete = view.findViewById(R.id.deleteButton);
         }
     }
 }

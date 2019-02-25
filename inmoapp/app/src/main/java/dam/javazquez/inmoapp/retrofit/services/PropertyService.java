@@ -36,7 +36,7 @@ public interface PropertyService {
     Call<PropertyResponse> edit(@Path("id") String id, @Body PropertyResponse edited);
 
     @DELETE(BASE_URL + "/{id}")
-    Call<PropertyResponse> delete(@Path("id") String id);
+    Call<PropertyFavsResponse> delete(@Path("id") String id);
 
     @DELETE(BASE_URL + "/fav/{id}")
     Call<PropertyResponse> deleteFav(@Path("id") String id);

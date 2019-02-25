@@ -29,4 +29,5 @@
     <string name="message_add">You have to log in! Shall we go to the Login Page?</string>
     <string name="go">Go</string>
     <string name="cancel">Cancel</string>
+    <string name="message_delete">This property will be deleted, are you sure?</string>
 </resources>
