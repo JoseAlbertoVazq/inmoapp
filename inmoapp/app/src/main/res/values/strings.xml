@@ -30,4 +30,10 @@
     <string name="go">Go</string>
     <string name="cancel">Cancel</string>
     <string name="message_delete">This property will be deleted, are you sure?</string>
+
+    <!--Geography-->
+    <string name="ready_bt_label">Ready</string>
+    <string name="region_dialog">Region: </string>
+    <string name="province_dialog">Province: </string>
+    <string name="city_dialog">City: </string>
 </resources>
