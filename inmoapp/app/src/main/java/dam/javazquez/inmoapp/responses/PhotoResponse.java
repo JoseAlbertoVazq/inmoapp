@@ -2,7 +2,8 @@ package dam.javazquez.inmoapp.responses;
 
 public class PhotoResponse {
 
-    private String propertyId;
+    private String id;
+    private PropertyResponse propertyId;
     private String imgurlink;
     private String deletehash;
 
@@ -10,17 +11,25 @@ public class PhotoResponse {
 
     }
 
-    public PhotoResponse(String propertyId, String imgurlink, String deletehash) {
+    public PhotoResponse(PropertyResponse propertyId, String imgurlink, String deletehash) {
         this.propertyId = propertyId;
         this.imgurlink = imgurlink;
         this.deletehash = deletehash;
     }
 
-    public String getPropertyId() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public PropertyResponse getPropertyId() {
         return propertyId;
     }
 
-    public void setPropertyId(String propertyId) {
+    public void setPropertyId(PropertyResponse propertyId) {
         this.propertyId = propertyId;
     }
 
