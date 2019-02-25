@@ -1,19 +1,25 @@
 package dam.javazquez.inmoapp.ui.common;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import dam.javazquez.inmoapp.R;
 import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
 import dam.javazquez.inmoapp.responses.PropertyResponse;
+import dam.javazquez.inmoapp.ui.addProperty.AddPropertyActivity;
 import dam.javazquez.inmoapp.ui.favs.PropertyFavFragment;
 import dam.javazquez.inmoapp.ui.login.LoginActivity;
 import dam.javazquez.inmoapp.ui.mines.MyPropertyFragment;
@@ -24,7 +30,8 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
     private TextView mTextMessage;
     FragmentTransaction fragmentChanger;
     private Fragment properties, favs, mines;
-    private String jwt = null;
+    private String jwt;
+    private FloatingActionButton fab;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
 
@@ -71,17 +78,34 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
                 return false;
             };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getToken();
         setContentView(R.layout.activity_dashboard);
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        fab = findViewById(R.id.fab);
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         properties = new PropertyFragment();
         favs = new PropertyFavFragment();
         mines = new MyPropertyFragment();
+
+        fab.setOnClickListener(v -> {
+            if (jwt == null) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(R.string.title_add).setMessage(R.string.message_add);
+                builder.setPositiveButton(R.string.go, (dialog, which) ->
+                        startActivity(new Intent(DashboardActivity.this, LoginActivity.class)));
+                builder.setNegativeButton(R.string.cancel, (dialog, id) -> {
+                   Log.d("Back", "Going back");
+                });
+                AlertDialog dialog = builder.create();
+
+                dialog.show();
+            }
+        });
     }
 
     public void getToken(){

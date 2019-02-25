@@ -2,7 +2,9 @@ package dam.javazquez.inmoapp.ui.properties;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,8 +83,16 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
             if(c == 0){
 
                 if (jwt == null) {
-                    Intent i = new Intent(contexto, LoginActivity.class);
-                    contexto.startActivity(i);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
+                    builder.setTitle(R.string.title_add).setMessage(R.string.message_add);
+                    builder.setPositiveButton(R.string.go, (dialog, which) ->
+                            contexto.startActivity(new Intent(contexto, LoginActivity.class)));
+                    builder.setNegativeButton(R.string.cancel, (dialog, id) -> {
+                        Log.d("Back", "Going back");
+                    });
+                    AlertDialog dialog = builder.create();
+
+                    dialog.show();
                 } else {
                     service = ServiceGenerator.createService(PropertyService.class, jwt, AuthType.JWT);
 

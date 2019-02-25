@@ -23,4 +23,10 @@
     <string name="size">Size</string>
     <string name="city">City</string>
     <string name="province">Province</string>
+
+    <!-- DIALOGS -->
+    <string name="title_add">WARNING</string>
+    <string name="message_add">You have to log in! Shall we go to the Login Page?</string>
+    <string name="go">Go</string>
+    <string name="cancel">Cancel</string>
 </resources>

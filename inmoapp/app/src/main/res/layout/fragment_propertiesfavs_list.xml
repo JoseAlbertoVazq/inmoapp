@@ -10,4 +10,7 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.favs.PropertyFavFragment"
-    tools:listitem="@layout/fragment_propertyfav" />
+    tools:listitem="@layout/fragment_propertyfav" >
+
+
+</android.support.v7.widget.RecyclerView>
