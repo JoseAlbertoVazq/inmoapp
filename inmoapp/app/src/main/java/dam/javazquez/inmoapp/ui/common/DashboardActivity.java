@@ -37,48 +37,47 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
 
-                if(jwt!=null) {
+        if (jwt != null) {
 
-                    switch (item.getItemId()) {
-                        case R.id.navigation_home:
-                          //  mTextMessage.setText(R.string.title_home);
-                            fragmentChanger = getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_dashboard, properties);
-                            fragmentChanger.commit();
-                            return true;
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    //  mTextMessage.setText(R.string.title_home);
+                    fragmentChanger = getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_dashboard, properties);
+                    fragmentChanger.commit();
+                    return true;
 
-                        case R.id.navigation_favs:
-                            //mTextMessage.setText(R.string.title_favs);
-                            fragmentChanger = getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_dashboard, favs);
-                            fragmentChanger.commit();
-                            return true;
-                        case R.id.navigation_mylist:
-                            //mTextMessage.setText(R.string.title_mylist);
-                            fragmentChanger = getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_dashboard, mines);
-                            fragmentChanger.commit();
-                            return true;
+                case R.id.navigation_favs:
+                    //mTextMessage.setText(R.string.title_favs);
+                    fragmentChanger = getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_dashboard, favs);
+                    fragmentChanger.commit();
+                    return true;
+                case R.id.navigation_mylist:
+                    //mTextMessage.setText(R.string.title_mylist);
+                    fragmentChanger = getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_dashboard, mines);
+                    fragmentChanger.commit();
+                    return true;
 
-                    }
-                }
-                else {
+            }
+        } else {
 
-                    switch (item.getItemId()) {
-                        case R.id.navigation_home:
-                        //    mTextMessage.setText(R.string.title_home);
-                            fragmentChanger = getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_dashboard, properties);
-                            fragmentChanger.commit();
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    //    mTextMessage.setText(R.string.title_home);
+                    fragmentChanger = getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_dashboard, properties);
+                    fragmentChanger.commit();
 
-                            return true;
+                    return true;
 
-                        case R.id.navigation_login:
-                      //      mTextMessage.setText(R.string.title_login);
-                            startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
-                            return true;
-                    }
+                case R.id.navigation_login:
+                    //      mTextMessage.setText(R.string.title_login);
+                    startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
+                    return true;
+            }
 
-                }
+        }
 
-                return false;
-            };
+        return false;
+    };
 
 
     @Override
@@ -102,7 +101,7 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
                 builder.setPositiveButton(R.string.go, (dialog, which) ->
                         startActivity(new Intent(DashboardActivity.this, LoginActivity.class)));
                 builder.setNegativeButton(R.string.cancel, (dialog, id) -> {
-                   Log.d("Back", "Going back");
+                    Log.d("Back", "Going back");
                 });
                 AlertDialog dialog = builder.create();
 
@@ -121,7 +120,8 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
             mBottomNavigationMenu.getMenu().removeItem(R.id.navigation_login);
         }
     }
-    public void getToken(){
+
+    public void getToken() {
         jwt = UtilToken.getToken(getApplicationContext());
     }
 
