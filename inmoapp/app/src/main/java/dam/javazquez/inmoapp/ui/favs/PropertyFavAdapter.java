@@ -19,7 +19,6 @@ import dam.javazquez.inmoapp.retrofit.generator.AuthType;
 import dam.javazquez.inmoapp.retrofit.generator.ServiceGenerator;
 import dam.javazquez.inmoapp.retrofit.services.PropertyService;
 import dam.javazquez.inmoapp.ui.favs.PropertyFavFragment.OnListFragmentInteractionListener;
-import dam.javazquez.inmoapp.ui.favs.dummy.DummyContent.DummyItem;
 import dam.javazquez.inmoapp.ui.login.LoginActivity;
 import dam.javazquez.inmoapp.util.UtilToken;
 import retrofit2.Call;
@@ -28,11 +27,6 @@ import retrofit2.Response;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class PropertyFavAdapter extends RecyclerView.Adapter<PropertyFavAdapter.ViewHolder> {
 
     private final List<PropertyFavsResponse> mValues;

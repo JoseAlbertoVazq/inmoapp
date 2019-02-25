@@ -18,15 +18,14 @@ import java.util.List;
 
 import dam.javazquez.inmoapp.R;
 import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
-import dam.javazquez.inmoapp.responses.PropertyResponse;
+
 import dam.javazquez.inmoapp.responses.ResponseContainer;
 import dam.javazquez.inmoapp.retrofit.generator.AuthType;
 import dam.javazquez.inmoapp.retrofit.generator.ServiceGenerator;
 import dam.javazquez.inmoapp.retrofit.services.PropertyService;
-import dam.javazquez.inmoapp.ui.favs.dummy.DummyContent;
-import dam.javazquez.inmoapp.ui.favs.dummy.DummyContent.DummyItem;
+
 import dam.javazquez.inmoapp.ui.login.LoginActivity;
-import dam.javazquez.inmoapp.ui.properties.PropertyAdapter;
+
 import dam.javazquez.inmoapp.util.UtilToken;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,6 +49,7 @@ public class PropertyFavFragment extends Fragment {
     String jwt;
     PropertyService service;
     PropertyFavAdapter adapter;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).

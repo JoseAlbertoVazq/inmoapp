@@ -16,13 +16,14 @@ import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
 import dam.javazquez.inmoapp.responses.PropertyResponse;
 import dam.javazquez.inmoapp.ui.favs.PropertyFavFragment;
 import dam.javazquez.inmoapp.ui.login.LoginActivity;
+import dam.javazquez.inmoapp.ui.mines.MyPropertyFragment;
 import dam.javazquez.inmoapp.ui.properties.PropertyFragment;
 import dam.javazquez.inmoapp.util.UtilToken;
 
-public class DashboardActivity extends AppCompatActivity implements PropertyFragment.OnListFragmentInteractionListener, PropertyFavFragment.OnListFragmentInteractionListener {
+public class DashboardActivity extends AppCompatActivity implements PropertyFragment.OnListFragmentInteractionListener, PropertyFavFragment.OnListFragmentInteractionListener, MyPropertyFragment.OnListFragmentInteractionListener {
     private TextView mTextMessage;
     FragmentTransaction fragmentChanger;
-    private Fragment properties, favs;
+    private Fragment properties, favs, mines;
     private String jwt = null;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -43,6 +44,8 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
                             return true;
                         case R.id.navigation_mylist:
                             //mTextMessage.setText(R.string.title_mylist);
+                            fragmentChanger = getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_dashboard, mines);
+                            fragmentChanger.commit();
                             return true;
 
                     }
@@ -78,6 +81,7 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         properties = new PropertyFragment();
         favs = new PropertyFavFragment();
+        mines = new MyPropertyFragment();
     }
 
     public void getToken(){

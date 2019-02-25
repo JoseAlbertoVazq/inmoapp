@@ -18,7 +18,7 @@ public interface PropertyService {
     Call<ResponseContainer<PropertyResponse>> listProperties();
 
     @GET(BASE_URL + "/mine")
-    Call<ResponseContainer<PropertyResponse>> getMine();
+    Call<ResponseContainer<PropertyFavsResponse>> getMine();
 
     @GET(BASE_URL + "/fav")
     Call<ResponseContainer<PropertyFavsResponse>> getFavs();
