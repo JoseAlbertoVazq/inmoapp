@@ -3,13 +3,13 @@ package dam.javazquez.inmoapp.responses;
 public class PropertyResponse {
 
     private String id;
-    private String ownerId;
+    private UserResponse ownerId;
     private String title;
     private String description;
     private float price;
     private Long number;
     private float size;
-    private String categoryId;
+    private CategoryResponse categoryId;
     private String address;
     private String zipcode;
     private String city;
@@ -20,7 +20,7 @@ public class PropertyResponse {
 
     }
 
-    public PropertyResponse(String ownerId, String title, String description, float price, Long number, float size, String categoryId, String address, String zipcode, String city, String province, String loc) {
+    public PropertyResponse(UserResponse ownerId, String title, String description, float price, Long number, float size, CategoryResponse categoryId, String address, String zipcode, String city, String province, String loc) {
         this.ownerId = ownerId;
         this.title = title;
         this.description = description;
@@ -44,11 +44,11 @@ public class PropertyResponse {
         this.id = id;
     }
 
-    public String getOwnerId() {
+    public UserResponse getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(String ownerId) {
+    public void setOwnerId(UserResponse ownerId) {
         this.ownerId = ownerId;
     }
 
@@ -92,11 +92,11 @@ public class PropertyResponse {
         this.size = size;
     }
 
-    public String getCategoryId() {
+    public CategoryResponse getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(CategoryResponse categoryId) {
         this.categoryId = categoryId;
     }
 

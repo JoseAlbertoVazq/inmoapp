@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.login.LoginActivity">
 
-    <fragment
+<!--    <fragment
         android:id="@+id/contenedor_login"
         android:name="dam.javazquez.inmoapp.ui.login.LoginFragment"
         android:layout_width="0dp"
@@ -14,5 +14,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />-->
+
+
+    <FrameLayout
+        android:id="@+id/contenedor_login"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>
