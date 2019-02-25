@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -29,6 +30,7 @@ import dam.javazquez.inmoapp.util.UtilToken;
 public class DashboardActivity extends AppCompatActivity implements PropertyFragment.OnListFragmentInteractionListener, PropertyFavFragment.OnListFragmentInteractionListener, MyPropertyFragment.OnListFragmentInteractionListener {
     private TextView mTextMessage;
     FragmentTransaction fragmentChanger;
+    private BottomNavigationView mBottomNavigationMenu;
     private Fragment properties, favs, mines;
     private String jwt;
     private FloatingActionButton fab;
@@ -91,7 +93,8 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
         properties = new PropertyFragment();
         favs = new PropertyFavFragment();
         mines = new MyPropertyFragment();
-
+        mBottomNavigationMenu = findViewById(R.id.nav_view);
+        setVisibleFalseDependsJwt();
         fab.setOnClickListener(v -> {
             if (jwt == null) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -108,6 +111,14 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
         });
     }
 
+    public void setVisibleFalseDependsJwt() {
+        if (jwt == null) {
+            mBottomNavigationMenu.getMenu().removeItem(R.id.navigation_favs);
+            mBottomNavigationMenu.getMenu().removeItem(R.id.navigation_mylist);
+        } else {
+            mBottomNavigationMenu.getMenu().removeItem(R.id.navigation_login);
+        }
+    }
     public void getToken(){
         jwt = UtilToken.getToken(getApplicationContext());
     }
