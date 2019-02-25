@@ -10,14 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b014ed3-5abe-4c58-b0e3-cd9ebc1dbc1b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/ui/common/DashboardActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/ui/common/DashboardActivity.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,15 +30,15 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/ui/common/DashboardActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-15">
-              <caret line="96" column="36" selection-start-line="96" selection-start-column="36" selection-end-line="96" selection-end-column="36" />
+            <state relative-caret-position="330">
+              <caret line="110" column="90" selection-start-line="110" selection-start-column="90" selection-end-line="110" selection-end-column="90" />
               <folding>
                 <element signature="e#4406#4424#0" expanded="true" />
                 <element signature="e#4437#4457#0" expanded="true" />
                 <element signature="e#4502#4513#0" expanded="true" />
                 <element signature="e#4673#4688#0" expanded="true" />
-                <element signature="e#5175#5176#0" expanded="true" />
-                <element signature="e#5240#5241#0" expanded="true" />
+                <element signature="e#5490#5491#0" expanded="true" />
+                <element signature="e#5555#5556#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -342,14 +334,21 @@
       <option name="project" value="LOCAL" />
       <updated>1551115243969</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="ocultos los items del menu depende de si está iniciada la sesión o no">
+      <created>1551116507524</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1551116507524</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49753696" visible="true" weight="0.32954547" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49753696" visible="true" weight="0.32954547" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" sideWeight="0.50246304" side_tool="true" weight="0.32954547" />
@@ -357,7 +356,7 @@
       <window_info id="Designer" order="6" />
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Capture Tool" order="8" />
-      <window_info anchor="bottom" id="Run" order="0" visible="true" weight="0.3289256" />
+      <window_info active="true" anchor="bottom" id="Run" order="0" visible="true" weight="0.3289256" />
       <window_info anchor="bottom" id="Logcat" order="1" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3289256" />
@@ -379,7 +378,8 @@
     <MESSAGE value="desmarca de favoritos" />
     <MESSAGE value="lista mis propiedades" />
     <MESSAGE value="alertdialogs que redirigen al login hechos" />
-    <option name="LAST_COMMIT_MESSAGE" value="alertdialogs que redirigen al login hechos" />
+    <MESSAGE value="ocultos los items del menu depende de si está iniciada la sesión o no" />
+    <option name="LAST_COMMIT_MESSAGE" value="ocultos los items del menu depende de si está iniciada la sesión o no" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
@@ -634,15 +634,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/ui/common/DashboardActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15">
-          <caret line="96" column="36" selection-start-line="96" selection-start-column="36" selection-end-line="96" selection-end-column="36" />
+        <state relative-caret-position="330">
+          <caret line="110" column="90" selection-start-line="110" selection-start-column="90" selection-end-line="110" selection-end-column="90" />
           <folding>
             <element signature="e#4406#4424#0" expanded="true" />
             <element signature="e#4437#4457#0" expanded="true" />
             <element signature="e#4502#4513#0" expanded="true" />
             <element signature="e#4673#4688#0" expanded="true" />
-            <element signature="e#5175#5176#0" expanded="true" />
-            <element signature="e#5240#5241#0" expanded="true" />
+            <element signature="e#5490#5491#0" expanded="true" />
+            <element signature="e#5555#5556#0" expanded="true" />
           </folding>
         </state>
       </provider>

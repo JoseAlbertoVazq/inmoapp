@@ -107,6 +107,8 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
                 AlertDialog dialog = builder.create();
 
                 dialog.show();
+            } else {
+                startActivity(new Intent(DashboardActivity.this, AddPropertyActivity.class));
             }
         });
     }
