@@ -37,7 +37,7 @@ public class PropertyFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
-    Context ctx;
+    Context ctx = getContext();
     List<PropertyResponse> properties = new ArrayList<>();
     String jwt;
     PropertyService service;
@@ -95,7 +95,7 @@ public class PropertyFragment extends Fragment {
                     } else {
                         properties = response.body().getRows();
 
-                        adapter = new PropertyAdapter(ctx, properties, mListener);
+                        adapter = new PropertyAdapter(context, properties, mListener);
                         recyclerView.setAdapter(adapter);
 
                     }

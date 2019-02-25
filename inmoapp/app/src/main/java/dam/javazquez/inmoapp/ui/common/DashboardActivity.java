@@ -12,15 +12,17 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import dam.javazquez.inmoapp.R;
+import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
 import dam.javazquez.inmoapp.responses.PropertyResponse;
+import dam.javazquez.inmoapp.ui.favs.PropertyFavFragment;
 import dam.javazquez.inmoapp.ui.login.LoginActivity;
 import dam.javazquez.inmoapp.ui.properties.PropertyFragment;
 import dam.javazquez.inmoapp.util.UtilToken;
 
-public class DashboardActivity extends AppCompatActivity implements PropertyFragment.OnListFragmentInteractionListener {
+public class DashboardActivity extends AppCompatActivity implements PropertyFragment.OnListFragmentInteractionListener, PropertyFavFragment.OnListFragmentInteractionListener {
     private TextView mTextMessage;
     FragmentTransaction fragmentChanger;
-    private Fragment properties;
+    private Fragment properties, favs;
     private String jwt = null;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -36,6 +38,8 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
 
                         case R.id.navigation_favs:
                             //mTextMessage.setText(R.string.title_favs);
+                            fragmentChanger = getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_dashboard, favs);
+                            fragmentChanger.commit();
                             return true;
                         case R.id.navigation_mylist:
                             //mTextMessage.setText(R.string.title_mylist);
@@ -73,6 +77,7 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         properties = new PropertyFragment();
+        favs = new PropertyFavFragment();
     }
 
     public void getToken(){
@@ -81,6 +86,11 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
 
     @Override
     public void onListFragmentInteraction(PropertyResponse item) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(PropertyFavsResponse item) {
 
     }
 }

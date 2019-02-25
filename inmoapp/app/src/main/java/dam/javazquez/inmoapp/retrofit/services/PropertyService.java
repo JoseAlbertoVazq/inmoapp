@@ -1,5 +1,6 @@
 package dam.javazquez.inmoapp.retrofit.services;
 
+import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
 import dam.javazquez.inmoapp.responses.PropertyResponse;
 import dam.javazquez.inmoapp.responses.ResponseContainer;
 import retrofit2.Call;
@@ -20,7 +21,7 @@ public interface PropertyService {
     Call<ResponseContainer<PropertyResponse>> getMine();
 
     @GET(BASE_URL + "/fav")
-    Call<ResponseContainer<PropertyResponse>> getFavs();
+    Call<ResponseContainer<PropertyFavsResponse>> getFavs();
 
     @GET(BASE_URL + "/{id}")
     Call<PropertyResponse> getOne(@Path("id") String id);

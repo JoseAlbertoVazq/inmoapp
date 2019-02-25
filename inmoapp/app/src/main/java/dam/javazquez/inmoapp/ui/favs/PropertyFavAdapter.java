@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import dam.javazquez.inmoapp.R;
+import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
 import dam.javazquez.inmoapp.responses.PropertyResponse;
 import dam.javazquez.inmoapp.ui.favs.PropertyFavFragment.OnListFragmentInteractionListener;
 import dam.javazquez.inmoapp.ui.favs.dummy.DummyContent.DummyItem;
@@ -24,11 +25,11 @@ import java.util.List;
  */
 public class PropertyFavAdapter extends RecyclerView.Adapter<PropertyFavAdapter.ViewHolder> {
 
-    private final List<PropertyResponse> mValues;
+    private final List<PropertyFavsResponse> mValues;
     private final OnListFragmentInteractionListener mListener;
     Context ctx;
 
-    public PropertyFavAdapter(Context ctx, List<PropertyResponse> items, OnListFragmentInteractionListener listener) {
+    public PropertyFavAdapter(Context ctx, List<PropertyFavsResponse> items, OnListFragmentInteractionListener listener) {
         this.ctx = ctx;
         mValues = items;
         mListener = listener;
@@ -72,7 +73,7 @@ public class PropertyFavAdapter extends RecyclerView.Adapter<PropertyFavAdapter.
         public final TextView size;
         public final TextView city;
         public final ImageView photo;
-        public PropertyResponse mItem;
+        public PropertyFavsResponse mItem;
 
         public ViewHolder(View view) {
             super(view);

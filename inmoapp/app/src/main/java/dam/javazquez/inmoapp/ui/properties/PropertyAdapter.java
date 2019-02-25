@@ -47,7 +47,6 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
         mValues = items;
         mListener = listener;
         contexto = ctx;
-        jwt = UtilToken.getToken(ctx);
     }
 
     @Override
@@ -59,12 +58,15 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+        jwt = UtilToken.getToken(contexto);
         holder.mItem = mValues.get(position);
         holder.title.setText(mValues.get(position).getTitle());
         holder.price.setText(String.valueOf(Math.round(mValues.get(position).getPrice()))+"€");
         holder.size.setText(String.valueOf(Math.round(mValues.get(position).getSize()))+"/m2");
         holder.city.setText(mValues.get(position).getCity());
-        Glide.with(holder.mView).load("https://http2.mlstatic.com/piso-flotante-alto-transito-manta-zocalo-83-mm-ofertapack-D_NQ_NP_903122-MLA25601513684_052017-F.jpg").into(holder.photo);
+        Glide.with(holder.mView).load("https://http2.mlstatic.com/piso-flotante-alto-transito-manta-zocalo-83-mm-ofertapack-D_NQ_NP_903122-MLA25601513684_052017-F.jpg")
+                .centerCrop()
+                .into(holder.photo);
 
         holder.mView.setOnClickListener(v -> {
             if (null != mListener) {
@@ -74,7 +76,10 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
             }
         });
         holder.fav.setOnClickListener(v -> {
-            if(holder.fav.getDrawable().getConstantState().equals(R.drawable.ic_no_fav)){
+            int c = 0;
+
+            if(c == 0){
+
                 if (jwt == null) {
                     Intent i = new Intent(contexto, LoginActivity.class);
                     contexto.startActivity(i);
@@ -88,7 +93,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
                             if (response.code() != 201) {
                                 Toast.makeText(contexto, "Error in request", Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(contexto, "Property created", Toast.LENGTH_LONG).show();
+                                Toast.makeText(contexto, "Added to favourites", Toast.LENGTH_LONG).show();
                             }
                         }
 
@@ -98,10 +103,35 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
                         }
                     });
                 }
+                c = 1;
+            holder.fav.setImageResource(R.drawable.ic_fav);
+            } else {
+                service = ServiceGenerator.createService(PropertyService.class, jwt, AuthType.JWT);
+
+                Call<PropertyResponse> call = service.deleteFav(holder.mItem.getId());
+                call.enqueue(new Callback<PropertyResponse>() {
+                    @Override
+                    public void onResponse(Call<PropertyResponse> call, Response<PropertyResponse> response) {
+                        if (response.code() != 200) {
+//                            Toast.makeText(contexto, "Error in request", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(contexto, "Deleted from favourites", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PropertyResponse> call, Throwable t) {
+//                        Toast.makeText(contexto, "Failure", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
+            c = 0;
+            holder.fav.setImageResource(R.drawable.ic_no_fav);
+
         });
 
     }
+
 
     @Override
     public int getItemCount() {

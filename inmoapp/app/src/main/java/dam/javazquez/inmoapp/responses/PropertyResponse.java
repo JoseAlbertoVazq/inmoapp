@@ -1,5 +1,8 @@
 package dam.javazquez.inmoapp.responses;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PropertyResponse {
 
     private String id;
@@ -15,6 +18,7 @@ public class PropertyResponse {
     private String city;
     private String province;
     private String loc;
+    private List<String> favs = new ArrayList<>();
 
     public PropertyResponse() {
 
@@ -138,5 +142,13 @@ public class PropertyResponse {
 
     public void setLoc(String loc) {
         this.loc = loc;
+    }
+
+    public List<String> getFavs() {
+        return favs;
+    }
+
+    public void setFavs(List<String> favs) {
+        this.favs = favs;
     }
 }

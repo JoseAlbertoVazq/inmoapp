@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dam.javazquez.inmoapp.R;
+import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
 import dam.javazquez.inmoapp.responses.PropertyResponse;
 import dam.javazquez.inmoapp.responses.ResponseContainer;
 import dam.javazquez.inmoapp.retrofit.generator.AuthType;
@@ -45,7 +46,7 @@ public class PropertyFavFragment extends Fragment {
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     Context ctx;
-    List<PropertyResponse> properties = new ArrayList<>();
+    List<PropertyFavsResponse> properties = new ArrayList<>();
     String jwt;
     PropertyService service;
     PropertyFavAdapter adapter;
@@ -96,10 +97,10 @@ public class PropertyFavFragment extends Fragment {
             }
             service = ServiceGenerator.createService(PropertyService.class, jwt, AuthType.JWT);
 
-            Call<ResponseContainer<PropertyResponse>> call = service.getFavs();
-            call.enqueue(new Callback<ResponseContainer<PropertyResponse>>() {
+            Call<ResponseContainer<PropertyFavsResponse>> call = service.getFavs();
+            call.enqueue(new Callback<ResponseContainer<PropertyFavsResponse>>() {
                 @Override
-                public void onResponse(Call<ResponseContainer<PropertyResponse>> call, Response<ResponseContainer<PropertyResponse>> response) {
+                public void onResponse(Call<ResponseContainer<PropertyFavsResponse>> call, Response<ResponseContainer<PropertyFavsResponse>> response) {
                     if (response.code() != 200) {
                         Toast.makeText(getActivity(), "Error in request", Toast.LENGTH_SHORT).show();
                     } else {
@@ -112,7 +113,7 @@ public class PropertyFavFragment extends Fragment {
                 }
 
                 @Override
-                public void onFailure(Call<ResponseContainer<PropertyResponse>> call, Throwable t) {
+                public void onFailure(Call<ResponseContainer<PropertyFavsResponse>> call, Throwable t) {
                     Log.e("NetworkFailure", t.getMessage());
                     Toast.makeText(getActivity(), "Error de conexión", Toast.LENGTH_SHORT).show();
                 }
@@ -151,6 +152,6 @@ public class PropertyFavFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(PropertyResponse item);
+        void onListFragmentInteraction(PropertyFavsResponse item);
     }
 }
