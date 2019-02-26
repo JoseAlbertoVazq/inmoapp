@@ -124,7 +124,7 @@ public class PropertyFavAdapter extends RecyclerView.Adapter<PropertyFavAdapter.
             super(view);
             mView = view;
             title = view.findViewById(R.id.title);
-            price = view.findViewById(R.id.price);
+            price = view.findViewById(R.id.price_property);
             size = view.findViewById(R.id.size);
             city = view.findViewById(R.id.city);
             photo = view.findViewById(R.id.photo);

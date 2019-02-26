@@ -1,7 +1,6 @@
 package dam.javazquez.inmoapp.ui.mines;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,12 +16,9 @@ import com.bumptech.glide.Glide;
 
 import dam.javazquez.inmoapp.R;
 import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
-import dam.javazquez.inmoapp.responses.PropertyResponse;
 import dam.javazquez.inmoapp.retrofit.generator.AuthType;
 import dam.javazquez.inmoapp.retrofit.generator.ServiceGenerator;
 import dam.javazquez.inmoapp.retrofit.services.PropertyService;
-import dam.javazquez.inmoapp.ui.common.DashboardActivity;
-import dam.javazquez.inmoapp.ui.login.LoginActivity;
 import dam.javazquez.inmoapp.ui.mines.MyPropertyFragment.OnListFragmentInteractionListener;
 import dam.javazquez.inmoapp.util.UtilToken;
 import retrofit2.Call;
@@ -133,7 +129,7 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.Vi
             super(view);
             mView = view;
             title = view.findViewById(R.id.title);
-            price = view.findViewById(R.id.price);
+            price = view.findViewById(R.id.price_property);
             size = view.findViewById(R.id.size);
             city = view.findViewById(R.id.city);
             photo = view.findViewById(R.id.photo);

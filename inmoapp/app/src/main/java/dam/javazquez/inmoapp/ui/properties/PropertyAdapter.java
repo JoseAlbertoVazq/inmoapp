@@ -14,12 +14,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-import org.w3c.dom.Text;
-
 import dam.javazquez.inmoapp.R;
 import dam.javazquez.inmoapp.responses.PhotoResponse;
 import dam.javazquez.inmoapp.responses.PropertyResponse;
-import dam.javazquez.inmoapp.responses.ResponseContainer;
 import dam.javazquez.inmoapp.retrofit.generator.AuthType;
 import dam.javazquez.inmoapp.retrofit.generator.ServiceGenerator;
 import dam.javazquez.inmoapp.retrofit.services.PropertyService;
@@ -162,7 +159,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
             super(view);
             mView = view;
             title = view.findViewById(R.id.title);
-            price = view.findViewById(R.id.price);
+            price = view.findViewById(R.id.price_property);
             size = view.findViewById(R.id.size);
             city = view.findViewById(R.id.city);
             photo = view.findViewById(R.id.photo);
