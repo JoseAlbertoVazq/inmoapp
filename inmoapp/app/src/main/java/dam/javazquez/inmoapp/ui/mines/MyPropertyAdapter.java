@@ -59,7 +59,7 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.Vi
         holder.price.setText(String.valueOf(Math.round(mValues.get(position).getPrice())) + "€");
         holder.size.setText(String.valueOf(Math.round(mValues.get(position).getSize())) + "/m2");
         holder.city.setText(mValues.get(position).getCity());
-        Glide.with(holder.mView).load("https://http2.mlstatic.com/piso-flotante-alto-transito-manta-zocalo-83-mm-ofertapack-D_NQ_NP_903122-MLA25601513684_052017-F.jpg")
+        Glide.with(holder.mView).load(holder.mItem.getPhotos().get(0))
                 .centerCrop()
                 .into(holder.photo);
 

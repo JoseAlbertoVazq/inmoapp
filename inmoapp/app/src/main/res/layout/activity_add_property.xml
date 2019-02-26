@@ -153,10 +153,10 @@
             android:layout_width="242dp"
             android:layout_height="31dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="28dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btProbar" />
 
@@ -193,5 +193,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_add"
             app:layout_constraintVertical_bias="1.0" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/addPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="72dp"
+            android:clickable="true"
+            app:backgroundTint="#00EEEEEE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.943"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.991"
+            app:srcCompat="@drawable/ic_add_photo" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>
