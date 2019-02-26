@@ -56,6 +56,18 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
                     fragmentChanger = getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_dashboard, mines);
                     fragmentChanger.commit();
                     return true;
+                case R.id.navigation_logout:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(R.string.title_add).setMessage(R.string.message_logout);
+                builder.setPositiveButton(R.string.ok, (dialog, which) -> doLogout()
+                );
+                builder.setNegativeButton(R.string.cancel, (dialog, id) -> {
+                    Log.d("Back", "Going back");
+                });
+                AlertDialog dialog = builder.create();
+
+                dialog.show();
+                return true;
 
             }
         } else {
@@ -79,6 +91,12 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
         return false;
     };
 
+
+
+    public void doLogout(){
+        UtilToken.clearAll(this);
+        startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +134,7 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
         if (jwt == null) {
             mBottomNavigationMenu.getMenu().removeItem(R.id.navigation_favs);
             mBottomNavigationMenu.getMenu().removeItem(R.id.navigation_mylist);
+            mBottomNavigationMenu.getMenu().removeItem(R.id.navigation_logout);
         } else {
             mBottomNavigationMenu.getMenu().removeItem(R.id.navigation_login);
         }

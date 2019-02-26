@@ -35,7 +35,15 @@ public class UtilToken {
 
         return id;
     }
-
+    public static void clearAll(Context mContext){
+        SharedPreferences sharedPreferences =
+                mContext.getSharedPreferences(
+                        mContext.getString(R.string.sharedpreferences_filename),
+                        Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPreferences.edit();
+        editor.clear();
+        editor.commit();
+    }
 
     public static String getToken(Context mContext) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(
