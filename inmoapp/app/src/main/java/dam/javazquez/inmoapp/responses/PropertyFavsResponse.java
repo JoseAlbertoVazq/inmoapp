@@ -8,9 +8,9 @@ public class PropertyFavsResponse {
     private String ownerId;
     private String title;
     private String description;
-    private float price;
+    private Long price;
     private Long rooms;
-    private float size;
+    private Long size;
     private CategoryResponse categoryId;
     private String address;
     private String zipcode;
@@ -22,13 +22,13 @@ public class PropertyFavsResponse {
 
     }
 
-    public PropertyFavsResponse(String id, String ownerId, String title, String description, float price, Long number, float size, CategoryResponse categoryId, String address, String zipcode, String city, String province, String loc) {
+    public PropertyFavsResponse(String id, String ownerId, String title, String description, Long price, Long rooms, Long size, CategoryResponse categoryId, String address, String zipcode, String city, String province, String loc, List<String> photos) {
         this.id = id;
         this.ownerId = ownerId;
         this.title = title;
         this.description = description;
         this.price = price;
-        this.rooms = number;
+        this.rooms = rooms;
         this.size = size;
         this.categoryId = categoryId;
         this.address = address;
@@ -36,6 +36,7 @@ public class PropertyFavsResponse {
         this.city = city;
         this.province = province;
         this.loc = loc;
+        this.photos = photos;
     }
 
     public String getId() {
@@ -70,19 +71,19 @@ public class PropertyFavsResponse {
         this.description = description;
     }
 
-    public float getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
-    public float getSize() {
+    public Long getSize() {
         return size;
     }
 
-    public void setSize(float size) {
+    public void setSize(Long size) {
         this.size = size;
     }
 

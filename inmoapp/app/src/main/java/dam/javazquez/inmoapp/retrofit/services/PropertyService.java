@@ -27,7 +27,7 @@ public interface PropertyService {
     Call<PropertyResponse> getOne(@Path("id") String id);
 
     @POST(BASE_URL)
-    Call<PropertyResponse> create (@Body PropertyResponse property);
+    Call<PropertyResponse> create (@Body PropertyFavsResponse property);
 
     @POST(BASE_URL+"/fav/{id}")
     Call<PropertyResponse> addFav (@Path("id") String id);

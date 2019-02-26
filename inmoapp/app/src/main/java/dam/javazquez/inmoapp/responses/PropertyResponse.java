@@ -9,9 +9,9 @@ public class PropertyResponse {
     private UserResponse ownerId;
     private String title;
     private String description;
-    private float price;
+    private Long price;
     private Long rooms;
-    private float size;
+    private Long size;
     private CategoryResponse categoryId;
     private String address;
     private String zipcode;
@@ -24,12 +24,13 @@ public class PropertyResponse {
 
     }
 
-    public PropertyResponse(UserResponse ownerId, String title, String description, float price, Long number, float size, CategoryResponse categoryId, String address, String zipcode, String city, String province, String loc) {
+    public PropertyResponse(String id, UserResponse ownerId, String title, String description, Long price, Long rooms, Long size, CategoryResponse categoryId, String address, String zipcode, String city, String province, String loc, List<String> favs, List<String> photos) {
+        this.id = id;
         this.ownerId = ownerId;
         this.title = title;
         this.description = description;
         this.price = price;
-        this.rooms = number;
+        this.rooms = rooms;
         this.size = size;
         this.categoryId = categoryId;
         this.address = address;
@@ -37,8 +38,9 @@ public class PropertyResponse {
         this.city = city;
         this.province = province;
         this.loc = loc;
+        this.favs = favs;
+        this.photos = photos;
     }
-
 
     public String getId() {
         return id;
@@ -72,12 +74,16 @@ public class PropertyResponse {
         this.description = description;
     }
 
-    public float getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
     }
 
     public List<String> getPhotos() {
@@ -96,12 +102,8 @@ public class PropertyResponse {
         this.rooms = rooms;
     }
 
-    public float getSize() {
+    public Long getSize() {
         return size;
-    }
-
-    public void setSize(float size) {
-        this.size = size;
     }
 
     public CategoryResponse getCategoryId() {

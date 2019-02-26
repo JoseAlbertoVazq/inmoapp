@@ -104,7 +104,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/size_property"
+            android:id="@+id/size_add"
             android:layout_width="114dp"
             android:layout_height="42dp"
             android:layout_marginStart="8dp"
@@ -131,7 +131,7 @@
             app:layout_constraintBottom_toTopOf="@+id/tableLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/size_property" />
+            app:layout_constraintStart_toEndOf="@+id/size_add" />
 
         <EditText
             android:id="@+id/address_add"
@@ -146,7 +146,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.576"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/size_property" />
+            app:layout_constraintTop_toBottomOf="@+id/size_add" />
 
         <Spinner
             android:id="@+id/spinner_category"
@@ -187,7 +187,7 @@
             android:ems="10"
             android:hint="@string/description_prop"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/size_property"
+            app:layout_constraintBottom_toTopOf="@+id/size_add"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.546"
             app:layout_constraintStart_toStartOf="parent"
