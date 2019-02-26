@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ import dam.javazquez.inmoapp.retrofit.generator.ServiceGenerator;
 import dam.javazquez.inmoapp.retrofit.services.CategoryService;
 import dam.javazquez.inmoapp.retrofit.services.PropertyService;
 import dam.javazquez.inmoapp.retrofit.services.UserService;
+import dam.javazquez.inmoapp.util.Geocode;
 import dam.javazquez.inmoapp.util.UtilToken;
 import dam.javazquez.inmoapp.util.data.GeographySpain;
 import dam.javazquez.inmoapp.util.geography.GeographyListener;
@@ -48,6 +50,7 @@ public class AddPropertyActivity extends FragmentActivity
     private Button btProbar, btnAdd;
     private Spinner categories;
     private List<CategoryResponse> listCategories = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +71,7 @@ public class AddPropertyActivity extends FragmentActivity
         tvMunicipio = (TextView) findViewById(R.id.tvMunicipio);
 
         categories = findViewById(R.id.spinner_category);
+        loadAllCategories();
 
         fullAddress = "Calle " + address + ", " + zipcode + " " + " " + tvProvincia.toString() + ", España";
     }
@@ -83,17 +87,49 @@ public class AddPropertyActivity extends FragmentActivity
 
         if (v.getId() == R.id.add_property) {
             PropertyResponse create = new PropertyResponse();
-
+            CategoryResponse chosen = (CategoryResponse) categories.getSelectedItem();
             create.setTitle(title.toString());
             create.setDescription(description.toString());
             create.setAddress(address.toString());
             create.setZipcode(zipcode.toString());
             create.setCity(tvMunicipio.toString());
+            create.setProvince(tvProvincia.toString());
             create.setOwnerId(getMe());
+            create.setCategoryId(chosen);
 
+            try {
+                create.setLoc(getLoc(fullAddress));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //faltaría subir fotos
 
+            service = ServiceGenerator.createService(PropertyService.class, jwt, AuthType.JWT);
+            Call<PropertyResponse> callCreate = service.create(create);
+
+            callCreate.enqueue(new Callback<PropertyResponse>() {
+                @Override
+                public void onResponse(Call<PropertyResponse> call, Response<PropertyResponse> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(AddPropertyActivity.this, "Property created", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(AddPropertyActivity.this, "Error creating property", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<PropertyResponse> call, Throwable t) {
+                    Toast.makeText(AddPropertyActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
+    }
+
+
+    public String getLoc(String fullAddress) throws IOException {
+        String loc = Geocode.getLatLong(AddPropertyActivity.this, fullAddress);
+        return loc;
     }
 
     @Override
@@ -110,17 +146,17 @@ public class AddPropertyActivity extends FragmentActivity
         callC.enqueue(new Callback<ResponseContainer<CategoryResponse>>() {
             @Override
             public void onResponse(Call<ResponseContainer<CategoryResponse>> call, Response<ResponseContainer<CategoryResponse>> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     int spinnerPosition = 1;
                     Log.d("successCategory", "Got category");
                     listCategories = response.body().getRows();
                     System.out.println(listCategories);
 
                     ArrayAdapter<CategoryResponse> adapter =
-                            new ArrayAdapter<>(AddPropertyActivity.this, android.R.layout.simple_spinner_dropdown_item, listCategories );
+                            new ArrayAdapter<>(AddPropertyActivity.this, android.R.layout.simple_spinner_dropdown_item, listCategories);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     categories.setAdapter(adapter);
-                    categories.setSelection(listCategories.size()-1);
+                    categories.setSelection(listCategories.size() - 1);
                 } else {
                     Toast.makeText(AddPropertyActivity.this, "Error loading categories", Toast.LENGTH_SHORT).show();
                 }
