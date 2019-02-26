@@ -1,12 +1,15 @@
 package dam.javazquez.inmoapp.responses;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PropertyFavsResponse {
     private String id;
     private String ownerId;
     private String title;
     private String description;
     private float price;
-    private Long number;
+    private Long rooms;
     private float size;
     private CategoryResponse categoryId;
     private String address;
@@ -14,7 +17,7 @@ public class PropertyFavsResponse {
     private String city;
     private String province;
     private String loc;
-
+    private List<String> photos = new ArrayList<>();
     public PropertyFavsResponse() {
 
     }
@@ -25,7 +28,7 @@ public class PropertyFavsResponse {
         this.title = title;
         this.description = description;
         this.price = price;
-        this.number = number;
+        this.rooms = number;
         this.size = size;
         this.categoryId = categoryId;
         this.address = address;
@@ -73,14 +76,6 @@ public class PropertyFavsResponse {
 
     public void setPrice(float price) {
         this.price = price;
-    }
-
-    public Long getNumber() {
-        return number;
-    }
-
-    public void setNumber(Long number) {
-        this.number = number;
     }
 
     public float getSize() {
@@ -137,5 +132,21 @@ public class PropertyFavsResponse {
 
     public void setLoc(String loc) {
         this.loc = loc;
+    }
+
+    public Long getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Long rooms) {
+        this.rooms = rooms;
+    }
+
+    public List<String> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<String> photos) {
+        this.photos = photos;
     }
 }

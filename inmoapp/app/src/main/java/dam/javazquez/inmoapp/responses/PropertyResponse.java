@@ -19,7 +19,7 @@ public class PropertyResponse {
     private String province;
     private String loc;
     private List<String> favs = new ArrayList<>();
-
+    private List<String> photos = new ArrayList<>();
     public PropertyResponse() {
 
     }
@@ -80,6 +80,13 @@ public class PropertyResponse {
         this.price = price;
     }
 
+    public List<String> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<String> photos) {
+        this.photos = photos;
+    }
 
     public Long getRooms() {
         return rooms;
