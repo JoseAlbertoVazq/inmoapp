@@ -39,4 +39,18 @@
     <string name="region_dialog">Region: </string>
     <string name="province_dialog">Province: </string>
     <string name="city_dialog">City: </string>
+
+
+    <!-- ADD PROPERTY -->
+    <string name="title_prop">Title</string>
+    <string name="description_prop">Description</string>
+    <string name="price_prop">Price</string>
+    <string name="size_prop">Size</string>
+    <string name="rooms_prop">Rooms</string>
+    <string name="zipcode_prop">ZIP Code</string>
+
+
+
+
+
 </resources>

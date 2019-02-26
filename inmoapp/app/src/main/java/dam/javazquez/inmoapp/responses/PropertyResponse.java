@@ -10,7 +10,7 @@ public class PropertyResponse {
     private String title;
     private String description;
     private float price;
-    private Long number;
+    private Long rooms;
     private float size;
     private CategoryResponse categoryId;
     private String address;
@@ -29,7 +29,7 @@ public class PropertyResponse {
         this.title = title;
         this.description = description;
         this.price = price;
-        this.number = number;
+        this.rooms = number;
         this.size = size;
         this.categoryId = categoryId;
         this.address = address;
@@ -80,12 +80,13 @@ public class PropertyResponse {
         this.price = price;
     }
 
-    public Long getNumber() {
-        return number;
+
+    public Long getRooms() {
+        return rooms;
     }
 
-    public void setNumber(Long number) {
-        this.number = number;
+    public void setRooms(Long rooms) {
+        this.rooms = rooms;
     }
 
     public float getSize() {
