@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Geocode {
 
-    public String getLatLong(Context ctx,String address) throws IOException {
+    public static String getLatLong(Context ctx,String address) throws IOException {
         Geocoder geocoder = new Geocoder(ctx);
         double latitude = 0;
         double longitude = 0;
