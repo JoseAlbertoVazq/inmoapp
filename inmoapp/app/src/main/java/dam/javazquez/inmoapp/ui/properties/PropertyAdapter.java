@@ -148,6 +148,8 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
         });
 
         holder.constraintLayout.setOnClickListener(v -> {
+            System.out.println(holder.mItem.getId());
+            service = ServiceGenerator.createService(PropertyService.class);
             Call<ResponseContainerOneRow<PropertyResponse>> callOne = service.getOne(holder.mItem.getId());
             callOne.enqueue(new Callback<ResponseContainerOneRow<PropertyResponse>>() {
                 @Override
@@ -155,6 +157,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
                     PropertyResponse resp = response.body().getRows();
                     Intent detailsActivity = new Intent(contexto , DetailsActivity.class);
                     detailsActivity.putExtra("property", resp);
+                    contexto.startActivity(detailsActivity);
                 }
 
                 @Override

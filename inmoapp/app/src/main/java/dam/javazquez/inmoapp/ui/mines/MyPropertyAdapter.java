@@ -1,6 +1,8 @@
 package dam.javazquez.inmoapp.ui.mines;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,9 +18,12 @@ import com.bumptech.glide.Glide;
 
 import dam.javazquez.inmoapp.R;
 import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
+import dam.javazquez.inmoapp.responses.PropertyResponse;
+import dam.javazquez.inmoapp.responses.ResponseContainerOneRow;
 import dam.javazquez.inmoapp.retrofit.generator.AuthType;
 import dam.javazquez.inmoapp.retrofit.generator.ServiceGenerator;
 import dam.javazquez.inmoapp.retrofit.services.PropertyService;
+import dam.javazquez.inmoapp.ui.details.DetailsActivity;
 import dam.javazquez.inmoapp.ui.mines.MyPropertyFragment.OnListFragmentInteractionListener;
 import dam.javazquez.inmoapp.util.UtilToken;
 import retrofit2.Call;
@@ -90,6 +95,26 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.Vi
             dialog.show();
 
         });
+
+        holder.constraintLayout.setOnClickListener(v -> {
+            System.out.println(holder.mItem.getId());
+            service = ServiceGenerator.createService(PropertyService.class);
+            Call<ResponseContainerOneRow<PropertyResponse>> callOne = service.getOne(holder.mItem.getId());
+            callOne.enqueue(new Callback<ResponseContainerOneRow<PropertyResponse>>() {
+                @Override
+                public void onResponse(Call<ResponseContainerOneRow<PropertyResponse>> call, Response<ResponseContainerOneRow<PropertyResponse>> response) {
+                    PropertyResponse resp = response.body().getRows();
+                    Intent detailsActivity = new Intent(contexto , DetailsActivity.class);
+                    detailsActivity.putExtra("property", resp);
+                    contexto.startActivity(detailsActivity);
+                }
+
+                @Override
+                public void onFailure(Call<ResponseContainerOneRow<PropertyResponse>> call, Throwable t) {
+
+                }
+            });
+        });
     }
 
     public void deleteProperty(final ViewHolder holder) {
@@ -128,6 +153,7 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.Vi
         public final ImageView photo;
         public final ImageButton edit;
         public final ImageButton delete;
+        public final ConstraintLayout constraintLayout;
         public PropertyFavsResponse mItem;
 
         public ViewHolder(View view) {
@@ -140,6 +166,7 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.Vi
             photo = view.findViewById(R.id.photo);
             edit = view.findViewById(R.id.editButton);
             delete = view.findViewById(R.id.deleteButton);
+            constraintLayout = view.findViewById(R.id.constraint);
         }
     }
 }
