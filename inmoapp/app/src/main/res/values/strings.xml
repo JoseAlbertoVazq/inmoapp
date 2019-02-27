@@ -49,6 +49,7 @@
     <string name="rooms_prop">Rooms</string>
     <string name="zipcode_prop">ZIP Code</string>
     <string name="address_prop">Street Name, Number</string>
+    <string name="title_activity_details">DetailsActivity</string>
 
-
+    <string name="category_prop">Category</string>
 </resources>

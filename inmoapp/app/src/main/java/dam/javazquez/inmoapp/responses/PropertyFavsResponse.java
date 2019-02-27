@@ -1,9 +1,10 @@
 package dam.javazquez.inmoapp.responses;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PropertyFavsResponse {
+public class PropertyFavsResponse implements Serializable {
     private String id;
     private String ownerId;
     private String title;

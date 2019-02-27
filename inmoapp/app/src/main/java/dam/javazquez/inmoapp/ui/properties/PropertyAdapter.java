@@ -2,6 +2,7 @@ package dam.javazquez.inmoapp.ui.properties;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,9 +18,11 @@ import com.bumptech.glide.Glide;
 import dam.javazquez.inmoapp.R;
 import dam.javazquez.inmoapp.responses.PhotoResponse;
 import dam.javazquez.inmoapp.responses.PropertyResponse;
+import dam.javazquez.inmoapp.responses.ResponseContainerOneRow;
 import dam.javazquez.inmoapp.retrofit.generator.AuthType;
 import dam.javazquez.inmoapp.retrofit.generator.ServiceGenerator;
 import dam.javazquez.inmoapp.retrofit.services.PropertyService;
+import dam.javazquez.inmoapp.ui.details.DetailsActivity;
 import dam.javazquez.inmoapp.ui.login.LoginActivity;
 import dam.javazquez.inmoapp.ui.properties.PropertyFragment.OnListFragmentInteractionListener;
 import dam.javazquez.inmoapp.util.UtilToken;
@@ -69,7 +72,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
                     .centerCrop()
                     .into(holder.photo);
         } else {
-            Glide.with(holder.mView).load("https://www.esm.rochester.edu/uploads/NoPhotoAvailable.jpg")
+            Glide.with(holder.mView).load("https://rexdalehyundai.ca/dist/img/nophoto.jpg")
                     .centerCrop()
                     .into(holder.photo);
         }
@@ -80,6 +83,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
                 mListener.onListFragmentInteraction(holder.mItem);
             }
         });
+        //poner los dos iconos uno encima de otro y lo que hay que hacer es setear la visibilidad true o false depende
         holder.fav.setOnClickListener(v -> {
             int c = 0;
 
@@ -143,6 +147,23 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
 
         });
 
+        holder.constraintLayout.setOnClickListener(v -> {
+            Call<ResponseContainerOneRow<PropertyResponse>> callOne = service.getOne(holder.mItem.getId());
+            callOne.enqueue(new Callback<ResponseContainerOneRow<PropertyResponse>>() {
+                @Override
+                public void onResponse(Call<ResponseContainerOneRow<PropertyResponse>> call, Response<ResponseContainerOneRow<PropertyResponse>> response) {
+                    PropertyResponse resp = response.body().getRows();
+                    Intent detailsActivity = new Intent(contexto , DetailsActivity.class);
+                    detailsActivity.putExtra("property", resp);
+                }
+
+                @Override
+                public void onFailure(Call<ResponseContainerOneRow<PropertyResponse>> call, Throwable t) {
+
+                }
+            });
+        });
+
     }
 
 
@@ -160,7 +181,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
         public final ImageView photo;
         public final ImageView fav;
         public PropertyResponse mItem;
-
+        public ConstraintLayout constraintLayout;
         public ViewHolder(View view) {
             super(view);
             mView = view;
@@ -170,6 +191,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
             city = view.findViewById(R.id.city);
             photo = view.findViewById(R.id.photo);
             fav = view.findViewById(R.id.favPrincipal);
+            constraintLayout = view.findViewById(R.id.constraint);
         }
 
     }

@@ -4,6 +4,7 @@ import dam.javazquez.inmoapp.dto.AddPropertyDto;
 import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
 import dam.javazquez.inmoapp.responses.PropertyResponse;
 import dam.javazquez.inmoapp.responses.ResponseContainer;
+import dam.javazquez.inmoapp.responses.ResponseContainerOneRow;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -25,7 +26,7 @@ public interface PropertyService {
     Call<ResponseContainer<PropertyResponse>> getFavs();
 
     @GET(BASE_URL + "/{id}")
-    Call<PropertyResponse> getOne(@Path("id") String id);
+    Call<ResponseContainerOneRow<PropertyResponse>>getOne(@Path("id") String id);
 
     @POST(BASE_URL)
     Call<AddPropertyDto> create (@Body AddPropertyDto property);

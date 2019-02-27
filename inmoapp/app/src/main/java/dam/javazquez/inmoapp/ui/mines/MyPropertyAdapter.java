@@ -64,7 +64,7 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.Vi
                     .centerCrop()
                     .into(holder.photo);
         } else {
-            Glide.with(holder.mView).load("https://www.esm.rochester.edu/uploads/NoPhotoAvailable.jpg")
+            Glide.with(holder.mView).load("https://rexdalehyundai.ca/dist/img/nophoto.jpg")
                     .centerCrop()
                     .into(holder.photo);
         }

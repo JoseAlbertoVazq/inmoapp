@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.property.DetailsActivity"
+    tools:showIn="@layout/activity_details">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/details_photo"
+
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewRightArrow"
+            app:layout_constraintStart_toEndOf="@+id/imageViewLeftArrow"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageViewLeftArrow"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/details_photo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/details_photo"
+            app:srcCompat="@drawable/ic_keyboard_arrow_left_black_24dp" />
+
+        <ImageView
+            android:id="@+id/imageViewRightArrow"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/details_photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/details_photo"
+            app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp" />
+
+        <TextView
+            android:id="@+id/details_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/title_prop"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageViewLeftArrow"
+            app:layout_constraintTop_toBottomOf="@+id/details_photo" />
+
+        <TextView
+            android:id="@+id/category_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/category_prop"
+            app:layout_constraintStart_toStartOf="@+id/details_title"
+            app:layout_constraintTop_toBottomOf="@+id/details_title" />
+
+        <TextView
+            android:id="@+id/price_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/price_prop"
+            app:layout_constraintStart_toEndOf="@+id/category_details"
+            app:layout_constraintTop_toTopOf="@+id/category_details" />
+
+        <TextView
+            android:id="@+id/rooms_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/rooms_prop"
+            app:layout_constraintStart_toEndOf="@+id/price_details"
+            app:layout_constraintTop_toTopOf="@+id/price_details" />
+
+        <TextView
+            android:id="@+id/details_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/size_prop"
+            app:layout_constraintStart_toEndOf="@+id/rooms_details"
+            app:layout_constraintTop_toTopOf="@+id/rooms_details" />
+
+        <TextView
+            android:id="@+id/details_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/description_prop"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewRightArrow"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageViewLeftArrow"
+            app:layout_constraintTop_toBottomOf="@+id/category_details" />
+
+        <TextView
+            android:id="@+id/details_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/address_prop"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/details_description"
+            app:layout_constraintTop_toBottomOf="@+id/details_description" />
+
+        <TextView
+            android:id="@+id/details_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/city"
+            app:layout_constraintStart_toStartOf="@+id/details_address"
+            app:layout_constraintTop_toBottomOf="@+id/details_address" />
+
+        <TextView
+            android:id="@+id/details_zipcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/zipcode_prop"
+            app:layout_constraintStart_toStartOf="@+id/details_city"
+            app:layout_constraintTop_toBottomOf="@+id/details_city" />
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapViewDetails"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:apiKey="AIzaSyDZ2Nj9veSteHFuontDUaZcqXhRVtI1UV8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewRightArrow"
+            app:layout_constraintStart_toEndOf="@+id/imageViewLeftArrow"
+            app:layout_constraintTop_toBottomOf="@+id/details_zipcode" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

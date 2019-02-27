@@ -1,6 +1,8 @@
 package dam.javazquez.inmoapp.responses;
 
-public class CategoryResponse {
+import java.io.Serializable;
+
+public class CategoryResponse implements Serializable {
 
     private String id;
     private String name;
