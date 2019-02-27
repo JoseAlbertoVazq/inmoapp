@@ -19,6 +19,7 @@ import java.util.List;
 import dam.javazquez.inmoapp.R;
 import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
 
+import dam.javazquez.inmoapp.responses.PropertyResponse;
 import dam.javazquez.inmoapp.responses.ResponseContainer;
 import dam.javazquez.inmoapp.retrofit.generator.AuthType;
 import dam.javazquez.inmoapp.retrofit.generator.ServiceGenerator;
@@ -26,6 +27,8 @@ import dam.javazquez.inmoapp.retrofit.services.PropertyService;
 
 import dam.javazquez.inmoapp.ui.login.LoginActivity;
 
+import dam.javazquez.inmoapp.ui.properties.PropertyAdapter;
+import dam.javazquez.inmoapp.ui.properties.PropertyFragment;
 import dam.javazquez.inmoapp.util.UtilToken;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,10 +48,10 @@ public class PropertyFavFragment extends Fragment {
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     Context ctx = getContext();
-    List<PropertyFavsResponse> properties = new ArrayList<>();
+    List<PropertyResponse> properties = new ArrayList<>();
     String jwt;
     PropertyService service;
-    PropertyFavAdapter adapter;
+    PropertyAdapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -97,23 +100,23 @@ public class PropertyFavFragment extends Fragment {
             }
             service = ServiceGenerator.createService(PropertyService.class, jwt, AuthType.JWT);
 
-            Call<ResponseContainer<PropertyFavsResponse>> call = service.getFavs();
-            call.enqueue(new Callback<ResponseContainer<PropertyFavsResponse>>() {
+            Call<ResponseContainer<PropertyResponse>> call = service.getFavs();
+            call.enqueue(new Callback<ResponseContainer<PropertyResponse>>() {
                 @Override
-                public void onResponse(Call<ResponseContainer<PropertyFavsResponse>> call, Response<ResponseContainer<PropertyFavsResponse>> response) {
+                public void onResponse(Call<ResponseContainer<PropertyResponse>> call, Response<ResponseContainer<PropertyResponse>> response) {
                     if (response.code() != 200) {
                         Toast.makeText(getActivity(), "Error in request", Toast.LENGTH_SHORT).show();
                     } else {
                         properties = response.body().getRows();
 
-                        adapter = new PropertyFavAdapter(context, properties, mListener);
+                        adapter = new PropertyAdapter(context, properties, mListener);
                         recyclerView.setAdapter(adapter);
 
                     }
                 }
 
                 @Override
-                public void onFailure(Call<ResponseContainer<PropertyFavsResponse>> call, Throwable t) {
+                public void onFailure(Call<ResponseContainer<PropertyResponse>> call, Throwable t) {
                     Log.e("NetworkFailure", t.getMessage());
                     Toast.makeText(getActivity(), "Error de conexión", Toast.LENGTH_SHORT).show();
                 }
@@ -150,8 +153,8 @@ public class PropertyFavFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnListFragmentInteractionListener {
+    public interface OnListFragmentInteractionListener extends PropertyFragment.OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(PropertyFavsResponse item);
+        void onListFragmentInteraction(PropertyResponse item);
     }
 }

@@ -149,6 +149,7 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
 
     }
 
+
     @Override
     public void onListFragmentInteraction(PropertyFavsResponse item) {
 

@@ -29,13 +29,13 @@ import java.util.List;
 
 public class PropertyFavAdapter extends RecyclerView.Adapter<PropertyFavAdapter.ViewHolder> {
 
-    private final List<PropertyFavsResponse> mValues;
+    private final List<PropertyResponse> mValues;
     private final OnListFragmentInteractionListener mListener;
     Context contexto;
     PropertyService service;
     String jwt;
 
-    public PropertyFavAdapter(Context ctx, List<PropertyFavsResponse> items, OnListFragmentInteractionListener listener) {
+    public PropertyFavAdapter(Context ctx, List<PropertyResponse> items, OnListFragmentInteractionListener listener) {
         this.contexto = ctx;
         mValues = items;
         mListener = listener;
@@ -118,7 +118,7 @@ public class PropertyFavAdapter extends RecyclerView.Adapter<PropertyFavAdapter.
         public final TextView city;
         public final ImageView photo;
         public final ImageView fav;
-        public PropertyFavsResponse mItem;
+        public PropertyResponse mItem;
 
         public ViewHolder(View view) {
             super(view);

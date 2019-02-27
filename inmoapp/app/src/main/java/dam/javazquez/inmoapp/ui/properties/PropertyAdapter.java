@@ -60,13 +60,19 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
         jwt = UtilToken.getToken(contexto);
         holder.mItem = mValues.get(position);
         holder.title.setText(mValues.get(position).getTitle());
-        holder.price.setText(String.valueOf(Math.round(mValues.get(position).getPrice()))+"€");
-        holder.size.setText(String.valueOf(Math.round(mValues.get(position).getSize()))+"/m2");
+        holder.price.setText(String.valueOf(Math.round(mValues.get(position).getPrice())) + "€");
+        holder.size.setText(String.valueOf(Math.round(mValues.get(position).getSize())) + "/m2");
         holder.city.setText(mValues.get(position).getCity());
-        Glide.with(holder.mView).load(holder.mItem.getPhotos().get(0))
-                .centerCrop()
-                .into(holder.photo);
 
+        if (holder.mItem.getPhotos().size() != 0) {
+            Glide.with(holder.mView).load(holder.mItem.getPhotos().get(0))
+                    .centerCrop()
+                    .into(holder.photo);
+        } else {
+            Glide.with(holder.mView).load("https://www.esm.rochester.edu/uploads/NoPhotoAvailable.jpg")
+                    .centerCrop()
+                    .into(holder.photo);
+        }
         holder.mView.setOnClickListener(v -> {
             if (null != mListener) {
                 // Notify the active callbacks interface (the activity, if the
@@ -77,7 +83,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
         holder.fav.setOnClickListener(v -> {
             int c = 0;
 
-            if(c == 0){
+            if (c == 0) {
 
                 if (jwt == null) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
@@ -111,7 +117,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
                     });
                 }
                 c = 1;
-            holder.fav.setImageResource(R.drawable.ic_fav);
+                holder.fav.setImageResource(R.drawable.ic_fav);
             } else {
                 service = ServiceGenerator.createService(PropertyService.class, jwt, AuthType.JWT);
 

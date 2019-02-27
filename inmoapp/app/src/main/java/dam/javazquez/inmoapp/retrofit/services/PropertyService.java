@@ -1,5 +1,6 @@
 package dam.javazquez.inmoapp.retrofit.services;
 
+import dam.javazquez.inmoapp.dto.AddPropertyDto;
 import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
 import dam.javazquez.inmoapp.responses.PropertyResponse;
 import dam.javazquez.inmoapp.responses.ResponseContainer;
@@ -21,13 +22,13 @@ public interface PropertyService {
     Call<ResponseContainer<PropertyFavsResponse>> getMine();
 
     @GET(BASE_URL + "/fav")
-    Call<ResponseContainer<PropertyFavsResponse>> getFavs();
+    Call<ResponseContainer<PropertyResponse>> getFavs();
 
     @GET(BASE_URL + "/{id}")
     Call<PropertyResponse> getOne(@Path("id") String id);
 
     @POST(BASE_URL)
-    Call<PropertyResponse> create (@Body PropertyFavsResponse property);
+    Call<AddPropertyDto> create (@Body AddPropertyDto property);
 
     @POST(BASE_URL+"/fav/{id}")
     Call<PropertyResponse> addFav (@Path("id") String id);

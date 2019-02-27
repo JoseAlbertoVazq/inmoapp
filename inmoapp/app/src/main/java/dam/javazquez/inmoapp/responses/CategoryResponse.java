@@ -2,6 +2,7 @@ package dam.javazquez.inmoapp.responses;
 
 public class CategoryResponse {
 
+    private String id;
     private String name;
 
     public CategoryResponse() {
@@ -10,6 +11,14 @@ public class CategoryResponse {
 
     public CategoryResponse(String name) {
         this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

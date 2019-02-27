@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 import dam.javazquez.inmoapp.R;
+import dam.javazquez.inmoapp.dto.AddPropertyDto;
 import dam.javazquez.inmoapp.responses.CategoryResponse;
 import dam.javazquez.inmoapp.responses.PhotoUploadResponse;
 import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
@@ -69,7 +70,7 @@ public class AddPropertyActivity extends FragmentActivity
     private Spinner categories;
     private List<CategoryResponse> listCategories = new ArrayList<>();
     private FloatingActionButton addPhoto;
-    PropertyResponse responseP;
+    AddPropertyDto responseP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,7 @@ public class AddPropertyActivity extends FragmentActivity
         me = getMe();
         uriSelected = null;
         addPhoto = findViewById(R.id.addPhoto);
+
 
         btnAdd = findViewById(R.id.add_property);
         btProbar = (Button) findViewById(R.id.btProbar);
@@ -109,7 +111,7 @@ public class AddPropertyActivity extends FragmentActivity
 /*            new android.os.Handler().postDelayed(
                     () -> Log.i("tag", "This'll run 800 milliseconds later"),
                     800);*/
-            uploadPhoto(responseP);
+
         });
     }
 
@@ -155,7 +157,7 @@ public class AddPropertyActivity extends FragmentActivity
             e.printStackTrace();
         }
 
-        PropertyFavsResponse create = new PropertyFavsResponse();
+        AddPropertyDto create = new AddPropertyDto();
         CategoryResponse chosen = (CategoryResponse) categories.getSelectedItem();
         create.setTitle(title.getText().toString());
         create.setDescription(description.getText().toString());
@@ -166,7 +168,7 @@ public class AddPropertyActivity extends FragmentActivity
         create.setSize(Long.parseLong(size.getText().toString()));
         create.setProvince(tvProvincia.getText().toString());
         create.setOwnerId(me.get_id());
-        create.setCategoryId(chosen);
+        create.setCategoryId(chosen.getId());
         create.setLoc(loc);
         //faltaría subir fotos
         addProperty(create);
@@ -248,18 +250,20 @@ public class AddPropertyActivity extends FragmentActivity
         return me;
     }
 
-    public void addProperty(PropertyFavsResponse create) {
+    public void addProperty(AddPropertyDto create) {
         service = ServiceGenerator.createService(PropertyService.class, jwt, AuthType.JWT);
 
 
-        Call<PropertyResponse> call = service.create(create);
-        call.enqueue(new Callback<PropertyResponse>() {
+        Call<AddPropertyDto> call = service.create(create);
+        call.enqueue(new Callback<AddPropertyDto>() {
             @Override
-            public void onResponse(Call<PropertyResponse> call, Response<PropertyResponse> response) {
+            public void onResponse(Call<AddPropertyDto> call, Response<AddPropertyDto> response) {
+                uploadPhoto(response.body());
                 if (response.isSuccessful()) {
                     //tratamiento de imágenes aquí, coger el id de la response y
                     //añadírsela a las imágenes subidas
-                    responseP = response.body();
+
+                    System.out.println(response.body());
 
                     Toast.makeText(AddPropertyActivity.this, "Created", Toast.LENGTH_SHORT).show();
                 } else {
@@ -268,7 +272,7 @@ public class AddPropertyActivity extends FragmentActivity
             }
 
             @Override
-            public void onFailure(Call<PropertyResponse> call, Throwable t) {
+            public void onFailure(Call<AddPropertyDto> call, Throwable t) {
                 Toast.makeText(AddPropertyActivity.this, "Failure", Toast.LENGTH_SHORT).show();
             }
         });
@@ -295,7 +299,7 @@ public class AddPropertyActivity extends FragmentActivity
             uriSelected = uri;
         }
     }
-    public void uploadPhoto(PropertyResponse response) {
+    public void uploadPhoto(AddPropertyDto responseP) {
         try {
             InputStream inputStream = getContentResolver().openInputStream(uriSelected);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -323,8 +327,9 @@ public class AddPropertyActivity extends FragmentActivity
             callPhoto.enqueue(new Callback<PhotoUploadResponse>() {
                 @Override
                 public void onResponse(Call<PhotoUploadResponse> call, Response<PhotoUploadResponse> response) {
-                    //mirar como sigue el otro código
+
                     if (response.isSuccessful()) {
+                        responseP.getPhotos().add(response.body().getId());
                         Log.d("Uploaded", "Éxito");
                         Log.d("Uploaded", response.body().toString());
                     } else {
