@@ -1,6 +1,7 @@
 package dam.javazquez.inmoapp.retrofit.services;
 
 import dam.javazquez.inmoapp.dto.AddPropertyDto;
+import dam.javazquez.inmoapp.dto.EditPropertyDto;
 import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
 import dam.javazquez.inmoapp.responses.PropertyResponse;
 import dam.javazquez.inmoapp.responses.ResponseContainer;
@@ -35,7 +36,7 @@ public interface PropertyService {
     Call<PropertyResponse> addFav (@Path("id") String id);
 
     @PUT(BASE_URL + "/{id}")
-    Call<PropertyResponse> edit(@Path("id") String id, @Body PropertyResponse edited);
+    Call<EditPropertyDto> edit(@Path("id") String id, @Body EditPropertyDto edited);
 
     @DELETE(BASE_URL + "/{id}")
     Call<PropertyFavsResponse> delete(@Path("id") String id);

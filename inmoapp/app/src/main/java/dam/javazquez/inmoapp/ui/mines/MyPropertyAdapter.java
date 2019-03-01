@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import dam.javazquez.inmoapp.R;
+import dam.javazquez.inmoapp.dto.EditPropertyDto;
 import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
 import dam.javazquez.inmoapp.responses.PropertyResponse;
 import dam.javazquez.inmoapp.responses.ResponseContainerOneRow;
@@ -24,6 +25,7 @@ import dam.javazquez.inmoapp.retrofit.generator.AuthType;
 import dam.javazquez.inmoapp.retrofit.generator.ServiceGenerator;
 import dam.javazquez.inmoapp.retrofit.services.PropertyService;
 import dam.javazquez.inmoapp.ui.details.DetailsActivity;
+import dam.javazquez.inmoapp.ui.editProperty.EditPropertyActivity;
 import dam.javazquez.inmoapp.ui.mines.MyPropertyFragment.OnListFragmentInteractionListener;
 import dam.javazquez.inmoapp.util.UtilToken;
 import retrofit2.Call;
@@ -33,7 +35,7 @@ import retrofit2.Response;
 import java.util.List;
 
 /**
-
+ *
  */
 public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.ViewHolder> {
 
@@ -82,6 +84,9 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.Vi
             }
         });
 
+
+        holder.edit.setOnClickListener(v -> createEdited(holder));
+
         holder.delete.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
             builder.setTitle(R.string.title_add).setMessage(R.string.message_delete);
@@ -104,7 +109,7 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.Vi
                 @Override
                 public void onResponse(Call<ResponseContainerOneRow<PropertyResponse>> call, Response<ResponseContainerOneRow<PropertyResponse>> response) {
                     PropertyResponse resp = response.body().getRows();
-                    Intent detailsActivity = new Intent(contexto , DetailsActivity.class);
+                    Intent detailsActivity = new Intent(contexto, DetailsActivity.class);
                     detailsActivity.putExtra("property", resp);
                     contexto.startActivity(detailsActivity);
                 }
@@ -125,7 +130,7 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.Vi
         callDelete.enqueue(new Callback<PropertyFavsResponse>() {
             @Override
             public void onResponse(Call<PropertyFavsResponse> call, Response<PropertyFavsResponse> response) {
-                if(response.code() == 200 || response.code() == 204) {
+                if (response.code() == 200 || response.code() == 204) {
                     Toast.makeText(contexto, "Property deleted", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(contexto, "Error while deleting", Toast.LENGTH_SHORT).show();
@@ -137,6 +142,44 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.Vi
                 Toast.makeText(contexto, "Failure", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void createEdited(final ViewHolder holder) {
+        EditPropertyDto editedDto = new EditPropertyDto();
+        System.out.println(holder.mItem.getId());
+        service = ServiceGenerator.createService(PropertyService.class);
+        Call<ResponseContainerOneRow<PropertyResponse>> callOne = service.getOne(holder.mItem.getId());
+        callOne.enqueue(new Callback<ResponseContainerOneRow<PropertyResponse>>() {
+            @Override
+            public void onResponse(Call<ResponseContainerOneRow<PropertyResponse>> call, Response<ResponseContainerOneRow<PropertyResponse>> response) {
+                PropertyResponse resp = response.body().getRows();
+                editedDto.setId(resp.getId());
+                editedDto.setAddress(resp.getAddress());
+                editedDto.setCategoryId(resp.getCategoryId().getId());
+                editedDto.setCity(resp.getCity());
+                editedDto.setDescription(resp.getDescription());
+                editedDto.setLoc(resp.getLoc());
+                editedDto.setOwnerId(resp.getOwnerId().get_id());
+                editedDto.setPhotos(resp.getPhotos());
+                editedDto.setPrice(resp.getPrice());
+                editedDto.setRooms(resp.getRooms());
+                editedDto.setProvince(resp.getProvince());
+                editedDto.setZipcode(resp.getZipcode());
+                editedDto.setSize(resp.getSize());
+                editedDto.setTitle(resp.getTitle());
+
+                Intent editActivity = new Intent(contexto, EditPropertyActivity.class);
+                editActivity.putExtra("property", editedDto);
+                contexto.startActivity(editActivity);
+            }
+
+            @Override
+            public void onFailure(Call<ResponseContainerOneRow<PropertyResponse>> call, Throwable t) {
+
+            }
+        });
+
+
     }
 
     @Override

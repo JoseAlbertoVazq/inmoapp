@@ -170,7 +170,7 @@ public class AddPropertyActivity extends FragmentActivity
         create.setOwnerId(me.get_id());
         create.setCategoryId(chosen.getId());
         create.setLoc(loc);
-        //faltaría subir fotos
+
         addProperty(create);
 
     }
