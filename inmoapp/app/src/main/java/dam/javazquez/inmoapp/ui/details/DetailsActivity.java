@@ -329,7 +329,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
                         Log.d("Uploaded", "Éxito");
                         Log.d("Uploaded", response.body().toString());
                         System.out.println(response.code());
-                        // TODO: editar la PROPIEDAD aquí
+
                     } else {
                         Log.e("Upload error", response.errorBody().toString());
                     }
