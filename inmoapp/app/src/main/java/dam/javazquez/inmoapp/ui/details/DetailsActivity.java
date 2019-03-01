@@ -11,8 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,42 +33,55 @@ import java.io.InputStream;
 
 import dam.javazquez.inmoapp.R;
 import dam.javazquez.inmoapp.dto.AddPropertyDto;
+import dam.javazquez.inmoapp.responses.PhotoResponse;
 import dam.javazquez.inmoapp.responses.PhotoUploadResponse;
+import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
 import dam.javazquez.inmoapp.responses.PropertyResponse;
+import dam.javazquez.inmoapp.responses.ResponseContainer;
+import dam.javazquez.inmoapp.responses.UserResponse;
 import dam.javazquez.inmoapp.retrofit.generator.AuthType;
 import dam.javazquez.inmoapp.retrofit.generator.ServiceGenerator;
 import dam.javazquez.inmoapp.retrofit.services.PhotoService;
 import dam.javazquez.inmoapp.retrofit.services.PropertyService;
+import dam.javazquez.inmoapp.retrofit.services.UserService;
+import dam.javazquez.inmoapp.util.App;
 import dam.javazquez.inmoapp.util.UtilToken;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
     private ImageView photo, imageViewLeftArrow, imageViewRightArrow;
-    private Context ctx;
+    private Context ctx = App.getContext();
     private PropertyResponse property;
     private int count = 0;
     private MapView mapViewDetails;
     private PropertyService service;
     private GoogleMap gmap;
+    private ImageButton deletePhoto;
     private FloatingActionButton addPhoto;
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
     private TextView title, description, price, size, room, zipcode, address, category, city;
     public static final int READ_REQUEST_CODE = 42;
     Uri uriSelected;
-    String jwt;
+    String jwt, idUser;
+    private PhotoService servicePhoto;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        jwt = UtilToken.getToken(this);
+        jwt = UtilToken.getToken(DetailsActivity.this);
+        idUser = UtilToken.getToken(getApplicationContext());
+        System.out.println(idUser);
         setSupportActionBar(toolbar);
+        checkOwnerPhotos();
         FloatingActionButton fab = findViewById(R.id.fab);
 /*
         fab.setOnClickListener(new View.OnClickListener() {
@@ -101,13 +116,15 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         mapViewDetails.getMapAsync(this);
         imageViewRightArrow.setOnClickListener(v -> changePictureRight());
         imageViewLeftArrow.setOnClickListener(v -> changePictureLeft());
+
         addPhoto.setOnClickListener(v -> {
             performFileSearch();
         });
+        deletePhoto.setOnClickListener(v -> deletePhoto());
     }
 
     private void loadItems() {
-        ctx = this;
+
 
         title = findViewById(R.id.details_title);
         description = findViewById(R.id.details_description);
@@ -123,7 +140,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         imageViewRightArrow = findViewById(R.id.imageViewRightArrow);
         photo = findViewById(R.id.details_photo);
         addPhoto = findViewById(R.id.addPhotoDetails);
-
+        deletePhoto = findViewById(R.id.deletePhoto);
         if (property.getPhotos().size() == 0) {
             Glide.with(this).load("https://rexdalehyundai.ca/dist/img/nophoto.jpg")
                     .centerCrop()
@@ -132,10 +149,54 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             Glide.with(this).load(property.getPhotos().get(0)).centerCrop().into(photo);
         }
 
-        if(jwt == null){
+        if (jwt == null) {
             addPhoto.setImageDrawable(null);
         }
 
+
+    }
+
+    public void deletePhoto() {
+        servicePhoto = ServiceGenerator.createService(PhotoService.class);
+        Call<ResponseContainer<PhotoResponse>> callList = servicePhoto.getAll();
+        callList.enqueue(new Callback<ResponseContainer<PhotoResponse>>() {
+            @Override
+            public void onResponse(Call<ResponseContainer<PhotoResponse>> call, Response<ResponseContainer<PhotoResponse>> response) {
+                if (response.isSuccessful()) {
+
+                    for (PhotoResponse photo : response.body().getRows()) {
+                        if (photo.getImgurlink().equals(property.getPhotos().get(count))) {
+                            PhotoService servicePhotoDelete = ServiceGenerator.createService(PhotoService.class, jwt, AuthType.JWT);
+                            Call<PhotoResponse> callDelete = servicePhotoDelete.delete(photo.getId());
+                            callDelete.enqueue(new Callback<PhotoResponse>() {
+                                @Override
+                                public void onResponse(Call<PhotoResponse> call, Response<PhotoResponse> response) {
+                                    if (response.isSuccessful()) {
+                                        Toast.makeText(DetailsActivity.this, "Photo deleted", Toast.LENGTH_SHORT).show();
+                                    }else {
+                                        Toast.makeText(DetailsActivity.this, "no is.Successful DELETE", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<PhotoResponse> call, Throwable t) {
+                                    Toast.makeText(DetailsActivity.this, "Failure DELETE", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+                        }
+                    }
+                }else {
+                    Toast.makeText(DetailsActivity.this, "no is.Successful GET", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseContainer<PhotoResponse>> call, Throwable t) {
+                Toast.makeText(DetailsActivity.this, "Failure GET", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -348,4 +409,37 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             e.printStackTrace();
         }
     }
+
+    /**
+     * Trato de comprobar si el inmueble en el que se ha pulsado se encuentra entre los que el usuario logueado
+     * ha publicado, para que si lo es, enseñe los botones de añadir y eliminar fotos al inmueble, y si no lo es
+     * que no pueda hacerlo
+     */
+    public void checkOwnerPhotos(){
+        service = ServiceGenerator.createService(PropertyService.class, jwt, AuthType.JWT);
+        Call<ResponseContainer<PropertyFavsResponse>> callProp = service.getMine();
+        callProp.enqueue(new Callback<ResponseContainer<PropertyFavsResponse>>() {
+            @Override
+            public void onResponse(Call<ResponseContainer<PropertyFavsResponse>> call, Response<ResponseContainer<PropertyFavsResponse>> response) {
+                if(response.isSuccessful()){
+                    for(PropertyFavsResponse propertyMine : response.body().getRows()){
+                        System.out.println(propertyMine.getId());
+                        System.out.println(property.getId());
+                        if(propertyMine.getId().equals(property.getId())){
+                            Log.d("ok", "ok");
+                        }else{
+                            /*addPhoto.setImageDrawable(null);
+                            deletePhoto.setImageDrawable(null);*/
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseContainer<PropertyFavsResponse>> call, Throwable t) {
+
+            }
+        });
+    }
+
 }
