@@ -153,13 +153,13 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.Vi
             @Override
             public void onResponse(Call<ResponseContainerOneRow<PropertyResponse>> call, Response<ResponseContainerOneRow<PropertyResponse>> response) {
                 PropertyResponse resp = response.body().getRows();
-                editedDto.setId(resp.getId());
+                editedDto.setId(holder.mItem.getId());
                 editedDto.setAddress(resp.getAddress());
                 editedDto.setCategoryId(resp.getCategoryId().getId());
                 editedDto.setCity(resp.getCity());
                 editedDto.setDescription(resp.getDescription());
                 editedDto.setLoc(resp.getLoc());
-                editedDto.setOwnerId(resp.getOwnerId().get_id());
+                editedDto.setOwnerId(holder.mItem.getOwnerId());
                 editedDto.setPhotos(resp.getPhotos());
                 editedDto.setPrice(resp.getPrice());
                 editedDto.setRooms(resp.getRooms());

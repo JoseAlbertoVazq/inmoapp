@@ -116,7 +116,7 @@
             app:layout_constraintBottom_toTopOf="@+id/tableLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/price_add" />
+            app:layout_constraintStart_toEndOf="@+id/price_edit" />
 
         <EditText
             android:id="@+id/zipcode_edit"
@@ -131,7 +131,7 @@
             app:layout_constraintBottom_toTopOf="@+id/tableLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/size_add" />
+            app:layout_constraintStart_toEndOf="@+id/size_edit" />
 
         <EditText
             android:id="@+id/address_edit"
@@ -146,7 +146,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.576"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/size_add" />
+            app:layout_constraintTop_toBottomOf="@+id/size_edit" />
 
         <Spinner
             android:id="@+id/spinner_category"
@@ -187,11 +187,11 @@
             android:ems="10"
             android:hint="@string/description_prop"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/size_add"
+            app:layout_constraintBottom_toTopOf="@+id/size_edit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.546"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_add"
+            app:layout_constraintTop_toBottomOf="@+id/title_edit"
             app:layout_constraintVertical_bias="1.0" />
 
         <android.support.design.widget.FloatingActionButton

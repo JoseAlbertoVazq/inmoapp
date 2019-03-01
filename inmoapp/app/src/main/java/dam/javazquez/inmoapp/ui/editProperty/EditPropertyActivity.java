@@ -88,6 +88,7 @@ public class EditPropertyActivity extends FragmentActivity
         tvMunicipio = (TextView) findViewById(R.id.tvMunicipio);
 
         btProbar = findViewById(R.id.btProbar);
+        btProbar.setOnClickListener(this);
         categories = findViewById(R.id.spinner_category);
         loadAllCategories();
 
@@ -146,7 +147,7 @@ public class EditPropertyActivity extends FragmentActivity
             e.printStackTrace();
         }
 
-        EditPropertyDto edited = new EditPropertyDto();
+        EditPropertyDto edited = propertyDto;
         CategoryResponse chosen = (CategoryResponse) categories.getSelectedItem();
         edited.setTitle(title.getText().toString());
         edited.setDescription(description.getText().toString());
@@ -156,7 +157,6 @@ public class EditPropertyActivity extends FragmentActivity
         edited.setPrice(Long.parseLong(price.getText().toString()));
         edited.setSize(Long.parseLong(size.getText().toString()));
         edited.setProvince(tvProvincia.getText().toString());
-        edited.setOwnerId(UtilToken.getId(EditPropertyActivity.this));
         edited.setCategoryId(chosen.getId());
         edited.setLoc(loc);
 
@@ -206,7 +206,7 @@ public class EditPropertyActivity extends FragmentActivity
 
             @Override
             public void onFailure(Call<EditPropertyDto> call, Throwable t) {
-                Toast.makeText(EditPropertyActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(EditPropertyActivity.this, "Failure", Toast.LENGTH_SHORT).show();
             }
         });
     }
