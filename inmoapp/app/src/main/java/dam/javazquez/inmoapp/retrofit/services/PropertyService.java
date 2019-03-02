@@ -15,6 +15,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 public interface PropertyService {
@@ -22,6 +23,9 @@ public interface PropertyService {
 
     @GET(BASE_URL)
     Call<ResponseContainer<PropertyResponse>> listProperties(@QueryMap Map<String, String> options);
+
+    @GET(BASE_URL)
+    Call<ResponseContainer<PropertyResponse>> listGeo(@Query("near") String near);
 
     @GET(BASE_URL + "/mine")
     Call<ResponseContainer<PropertyFavsResponse>> getMine();

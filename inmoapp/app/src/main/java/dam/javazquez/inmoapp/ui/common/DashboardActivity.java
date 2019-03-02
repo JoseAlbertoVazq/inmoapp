@@ -30,6 +30,7 @@ import dam.javazquez.inmoapp.responses.PropertyResponse;
 import dam.javazquez.inmoapp.ui.addProperty.AddPropertyActivity;
 import dam.javazquez.inmoapp.ui.favs.PropertyFavFragment;
 import dam.javazquez.inmoapp.ui.login.LoginActivity;
+import dam.javazquez.inmoapp.ui.map.MapsActivity;
 import dam.javazquez.inmoapp.ui.mines.MyPropertyFragment;
 import dam.javazquez.inmoapp.ui.properties.PropertyFragment;
 import dam.javazquez.inmoapp.util.UtilToken;
@@ -43,7 +44,7 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
     private BottomNavigationView mBottomNavigationMenu;
     private Fragment properties, favs, mines;
     private String jwt;
-    private FloatingActionButton fab, search;
+    private FloatingActionButton fab, search, map;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
 
@@ -120,6 +121,7 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
         BottomNavigationView navView = findViewById(R.id.nav_view);
         fab = findViewById(R.id.fab);
         search = findViewById(R.id.searchFab);
+        map = findViewById(R.id.mapFab);
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         properties = new PropertyFragment();
@@ -145,6 +147,9 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
         });
 
         search.setOnClickListener(v -> searchOptions());
+        map.setOnClickListener(v -> {
+            startActivity(new Intent(DashboardActivity.this, MapsActivity.class));
+        });
     }
 
     public void setVisibleFalseDependsJwt() {
@@ -228,6 +233,7 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
                 } else if(max_size.getText().toString()!= ""){
                     options.put("max_size", max_size.getText().toString());
                 }
+                System.out.println(options.values());
                 properties = new PropertyFragment(options);
                 fragmentChanger = getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_dashboard, properties);
                 fragmentChanger.commit();
