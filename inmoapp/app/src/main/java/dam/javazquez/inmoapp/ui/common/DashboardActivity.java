@@ -200,7 +200,7 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
                 } else if (max_size.getText().toString() == null){
                     max_size.setText("");
                 }*/
-                options.put("rooms", rooms.getText().toString());
+/*                options.put("rooms", rooms.getText().toString());
                 options.put("city", city.getText().toString());
                 options.put("province", province.getText().toString());
                 options.put("zipcode", zipcode.getText().toString());
@@ -208,8 +208,8 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
                 options.put("min_price", min_price.getText().toString());
                 options.put("max_price", max_price.getText().toString());
                 options.put("min_size", min_size.getText().toString());
-                options.put("max_size", max_size.getText().toString());
-             /*   if(rooms.getText().toString()!=""){
+                options.put("max_size", max_size.getText().toString());*/
+                if(rooms.getText().toString()!=""){
                     options.put("rooms", rooms.getText().toString());
                 } else if(city.getText().toString()!=""){
                     options.put("city", city.getText().toString());
@@ -227,7 +227,7 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
                     options.put("min_size", min_size.getText().toString());
                 } else if(max_size.getText().toString()!= ""){
                     options.put("max_size", max_size.getText().toString());
-                }*/
+                }
                 properties = new PropertyFragment(options);
                 fragmentChanger = getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_dashboard, properties);
                 fragmentChanger.commit();

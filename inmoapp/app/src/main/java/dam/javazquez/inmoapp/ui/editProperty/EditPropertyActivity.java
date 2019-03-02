@@ -43,7 +43,7 @@ import retrofit2.Response;
 
 public class EditPropertyActivity extends FragmentActivity
         implements View.OnClickListener, GeographyListener {
-    private EditText title, description, price, size, zipcode, address;
+    private EditText title, description, price, size, zipcode, address, rooms;
     private String fullAddress, jwt, loc;
     private TextView tvRegion;
     private TextView tvProvincia;
@@ -82,7 +82,7 @@ public class EditPropertyActivity extends FragmentActivity
         size = findViewById(R.id.size_edit);
         zipcode = findViewById(R.id.zipcode_edit);
         address = findViewById(R.id.address_edit);
-
+        rooms = findViewById(R.id.rooms_edit);
         tvRegion = (TextView) findViewById(R.id.tvRegion);
         tvProvincia = (TextView) findViewById(R.id.tvProvincia);
         tvMunicipio = (TextView) findViewById(R.id.tvMunicipio);
@@ -103,6 +103,7 @@ public class EditPropertyActivity extends FragmentActivity
         size.setText(String.valueOf(propertyDto.getSize()));
         zipcode.setText(String.valueOf(propertyDto.getZipcode()));
         address.setText(propertyDto.getAddress());
+        rooms.setText(String.valueOf(propertyDto.getRooms()));
     }
 
     public void loadAllCategories() {
@@ -150,6 +151,7 @@ public class EditPropertyActivity extends FragmentActivity
         EditPropertyDto edited = propertyDto;
         CategoryResponse chosen = (CategoryResponse) categories.getSelectedItem();
         edited.setTitle(title.getText().toString());
+        edited.setRooms(Long.parseLong(rooms.getText().toString()));
         edited.setDescription(description.getText().toString());
         edited.setAddress(address.getText().toString());
         edited.setZipcode(zipcode.getText().toString());

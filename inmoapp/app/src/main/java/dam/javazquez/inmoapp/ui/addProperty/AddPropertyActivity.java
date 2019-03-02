@@ -58,7 +58,7 @@ import retrofit2.Response;
 public class AddPropertyActivity extends FragmentActivity
         implements View.OnClickListener, GeographyListener {
     public static final int READ_REQUEST_CODE = 42;
-    private EditText title, description, price, size, zipcode, address;
+    private EditText title, description, price, size, zipcode, address, rooms;
     private String fullAddress, jwt, loc;
     private TextView tvRegion;
     private TextView tvProvincia;
@@ -92,6 +92,7 @@ public class AddPropertyActivity extends FragmentActivity
         size = findViewById(R.id.size_add);
         address = findViewById(R.id.address_add);
         zipcode = findViewById(R.id.zipcode_add);
+        rooms = findViewById(R.id.rooms_add);
 
         tvRegion = (TextView) findViewById(R.id.tvRegion);
         tvProvincia = (TextView) findViewById(R.id.tvProvincia);
@@ -160,6 +161,7 @@ public class AddPropertyActivity extends FragmentActivity
         AddPropertyDto create = new AddPropertyDto();
         CategoryResponse chosen = (CategoryResponse) categories.getSelectedItem();
         create.setTitle(title.getText().toString());
+        create.setRooms(Long.parseLong(rooms.getText().toString()));
         create.setDescription(description.getText().toString());
         create.setAddress(address.getText().toString());
         create.setZipcode(zipcode.getText().toString());
