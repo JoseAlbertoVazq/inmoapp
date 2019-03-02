@@ -1,5 +1,7 @@
 package dam.javazquez.inmoapp.retrofit.services;
 
+import java.util.Map;
+
 import dam.javazquez.inmoapp.dto.AddPropertyDto;
 import dam.javazquez.inmoapp.dto.EditPropertyDto;
 import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
@@ -13,12 +15,13 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.QueryMap;
 
 public interface PropertyService {
     final String BASE_URL = "/properties";
 
     @GET(BASE_URL)
-    Call<ResponseContainer<PropertyResponse>> listProperties();
+    Call<ResponseContainer<PropertyResponse>> listProperties(@QueryMap Map<String, String> options);
 
     @GET(BASE_URL + "/mine")
     Call<ResponseContainer<PropertyFavsResponse>> getMine();

@@ -56,7 +56,7 @@ import retrofit2.Response;
 
 public class DetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
     private ImageView photo, imageViewLeftArrow, imageViewRightArrow;
-    private Context ctx = App.getContext();
+    private Context ctx;
     private PropertyResponse property;
     private int count = 0;
     private MapView mapViewDetails;
@@ -124,7 +124,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
     private void loadItems() {
-
+        ctx = this;
 
         title = findViewById(R.id.details_title);
         description = findViewById(R.id.details_description);
@@ -258,6 +258,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
     public void changePictureRight() {
         //count++;
+
         Glide
                 .with(ctx)
                 .load(property.getPhotos().get(count))
@@ -273,6 +274,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
     public void changePictureLeft() {
         //count--;
+
         Glide
                 .with(ctx)
                 .load(property.getPhotos().get(count))

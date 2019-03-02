@@ -1,5 +1,6 @@
 package dam.javazquez.inmoapp.ui.properties;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,7 +23,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A fragment representing a list of Items.
@@ -42,12 +45,19 @@ public class PropertyFragment extends Fragment {
     String jwt;
     PropertyService service;
     PropertyAdapter adapter;
-
+    Map<String, String> options = new HashMap<>();
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public PropertyFragment() {
+
+    public PropertyFragment(){
+
+    }
+
+    @SuppressLint("ValidFragment")
+    public PropertyFragment(Map<String,String> options) {
+        this.options = options;
     }
 
     // TODO: Customize parameter initialization
@@ -86,7 +96,7 @@ public class PropertyFragment extends Fragment {
 
             service = ServiceGenerator.createService(PropertyService.class);
 
-            Call<ResponseContainer<PropertyResponse>> call = service.listProperties();
+            Call<ResponseContainer<PropertyResponse>> call = service.listProperties(options);
             call.enqueue(new Callback<ResponseContainer<PropertyResponse>>() {
                 @Override
                 public void onResponse(Call<ResponseContainer<PropertyResponse>> call, Response<ResponseContainer<PropertyResponse>> response) {

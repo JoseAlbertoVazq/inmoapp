@@ -7,14 +7,15 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
+        android:name=".util.App"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:name="dam.javazquez.inmoapp.util.App"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.editProperty.EditPropertyActivity"></activity>
+        <activity android:name=".util.SearchActivity"></activity>
+        <activity android:name=".ui.editProperty.EditPropertyActivity" />
         <activity
             android:name=".ui.details.DetailsActivity"
             android:label="@string/title_activity_details"
