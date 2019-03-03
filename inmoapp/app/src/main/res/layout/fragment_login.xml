@@ -12,8 +12,8 @@
 
         <EditText
             android:id="@+id/email_login"
-            android:layout_width="0dp"
-            android:layout_height="43dp"
+            android:layout_width="270dp"
+            android:layout_height="49dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
@@ -21,15 +21,14 @@
             android:hint="@string/email"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.58"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.563" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/password_login"
-            android:layout_width="360dp"
-            android:layout_height="43dp"
+            android:layout_width="270dp"
+            android:layout_height="49dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
@@ -38,31 +37,34 @@
             android:inputType="textPassword"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.58"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/email_login"
-            app:layout_constraintVertical_bias="0.034" />
+            app:layout_constraintVertical_bias="0.028" />
 
         <Button
             android:id="@+id/btn_login"
-            android:layout_width="360dp"
-            android:layout_height="50dp"
+            android:layout_width="144dp"
+            android:layout_height="52dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="#46A2EB"
+            android:background="#7f0000"
+            android:color="#ffffff"
             android:text="Login"
+            android:textColor="#F7F5F5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password_login"
-            app:layout_constraintVertical_bias="0.032" />
+            app:layout_constraintVertical_bias="0.097" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="284dp"
-            android:layout_height="300dp"
+            android:layout_width="230dp"
+            android:layout_height="163dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -81,13 +83,47 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="#46A2EB"
+            android:background="#F05545"
             android:text="Sign Up"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_login"
-            app:layout_constraintVertical_bias="0.678" />
+            app:layout_constraintVertical_bias="0.553" />
+
+        <TextView
+            android:id="@+id/tVgoSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/tvGoSignUp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_signup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_login"
+            app:layout_constraintVertical_bias="0.913" />
+
+        <TextView
+            android:id="@+id/titleApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/app_name"
+            android:textColor="#b71c1c"
+            android:textSize="43sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/email_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintVertical_bias="0.257" />
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>
