@@ -30,6 +30,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import dam.javazquez.inmoapp.R;
 import dam.javazquez.inmoapp.dto.AddPropertyDto;
@@ -65,6 +67,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     private ImageButton deletePhoto;
     private FloatingActionButton addPhoto;
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
+    Map options = new HashMap();
     private TextView title, description, price, size, room, zipcode, address, category, city;
     public static final int READ_REQUEST_CODE = 42;
     Uri uriSelected;
@@ -79,6 +82,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         Toolbar toolbar = findViewById(R.id.toolbar);
         jwt = UtilToken.getToken(DetailsActivity.this);
         idUser = UtilToken.getToken(getApplicationContext());
+        options.put("near", "-6.0071807999999995,37.3803677");
         System.out.println(idUser);
         setSupportActionBar(toolbar);
         checkOwnerPhotos();

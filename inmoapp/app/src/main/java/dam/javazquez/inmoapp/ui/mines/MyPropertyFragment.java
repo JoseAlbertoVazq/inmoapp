@@ -26,7 +26,9 @@ import retrofit2.Response;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A fragment representing a list of Items.
@@ -41,6 +43,7 @@ public class MyPropertyFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    Map options = new HashMap();
     Context ctx = getContext();
     List<PropertyFavsResponse> properties = new ArrayList<>();
     String jwt;
@@ -67,7 +70,7 @@ public class MyPropertyFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        jwt = UtilToken.getToken(getContext());
+
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -81,6 +84,7 @@ public class MyPropertyFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
+            jwt = UtilToken.getToken(view.getContext());
             RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));

@@ -30,7 +30,7 @@ import retrofit2.Response;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final String TODO = "";
-    private FusedLocationProviderClient fusedLocationClient;
+    FusedLocationProviderClient fusedLocationClient;
     private GoogleMap mMap;
     private PropertyService service;
 
@@ -59,13 +59,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        LatLng latlng = new LatLng(37.3803677,-6.0071807999999995);
   /*      // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
         service = ServiceGenerator.createService(PropertyService.class);
-        Call<ResponseContainer<PropertyResponse>> callGeo = service.listGeo(getCurrentLocation());
+        Call<ResponseContainer<PropertyResponse>> callGeo = service.listGeo("-6.0071807999999995,37.3803677");
         callGeo.enqueue(new Callback<ResponseContainer<PropertyResponse>>() {
             @Override
             public void onResponse(Call<ResponseContainer<PropertyResponse>> call, Response<ResponseContainer<PropertyResponse>> response) {
@@ -110,7 +110,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
-
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 15));
     }
 
     public String getCurrentLocation() {

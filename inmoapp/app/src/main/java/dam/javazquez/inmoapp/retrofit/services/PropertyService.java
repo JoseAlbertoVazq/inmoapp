@@ -24,6 +24,9 @@ public interface PropertyService {
     @GET(BASE_URL)
     Call<ResponseContainer<PropertyResponse>> listProperties(@QueryMap Map<String, String> options);
 
+    @GET(BASE_URL+"/auth")
+    Call<ResponseContainer<PropertyResponse>> listPropertiesAuth(@QueryMap Map<String, String> options);
+
     @GET(BASE_URL)
     Call<ResponseContainer<PropertyResponse>> listGeo(@Query("near") String near);
 
