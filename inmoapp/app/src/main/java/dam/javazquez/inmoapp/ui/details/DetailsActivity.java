@@ -234,6 +234,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         description.setText(property.getDescription());
         price.setText(String.valueOf(property.getPrice()) + "€");
         address.setText(property.getAddress());
+        room.setText(String.valueOf(property.getRooms()));
         size.setText(String.valueOf(property.getSize()) + "/m2");
         city.setText(property.getZipcode() + ", " + property.getCity() + ", " + property.getProvince());
         category.setText(property.getCategoryId().getName());
