@@ -38,7 +38,7 @@ import dam.javazquez.inmoapp.util.UtilToken;
 public class DashboardActivity extends AppCompatActivity implements PropertyFragment.OnListFragmentInteractionListener, PropertyFavFragment.OnListFragmentInteractionListener, MyPropertyFragment.OnListFragmentInteractionListener {
     private TextView mTextMessage;
     FragmentTransaction fragmentChanger;
-    EditText rooms, city, province, address, zipcode, min_price, max_price, min_size, max_size;
+    EditText rooms, city, province, address, zipcode, min_price, max_price, min_size, max_size, limit;
     int frag = 0;
     Map<String, String> options = new HashMap<>();
     private BottomNavigationView mBottomNavigationMenu;
@@ -184,6 +184,7 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
         max_price = dialogLayout.findViewById(R.id.search_max_price);
         min_size = dialogLayout.findViewById(R.id.search_min_size);
         max_size = dialogLayout.findViewById(R.id.search_max_size);
+        limit = dialogLayout.findViewById(R.id.search_limit);
         builder.setPositiveButton(R.string.ok, (dialog, which) -> {
             if(frag == 0){
                 if(!rooms.getText().toString().equals("")){
@@ -204,6 +205,8 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
                     options.put("min_size", min_size.getText().toString());
                 } if(!max_size.getText().toString().equals("")){
                     options.put("max_size", max_size.getText().toString());
+                } if(!limit.getText().toString().equals("")){
+                    options.put("limit", limit.getText().toString());
                 }
                 System.out.println(options.values());
                 properties = new PropertyFragment(options);

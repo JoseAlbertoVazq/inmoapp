@@ -203,9 +203,6 @@ public class AddPropertyActivity extends FragmentActivity
                     System.out.println(listCategories);
                     List<String> namesC = new ArrayList<>();
 
-                 /*   for (CategoryResponse category : listCategories) {
-                        namesC.add(category.getName());
-                    }*/
                     ArrayAdapter<CategoryResponse> adapter =
                             new ArrayAdapter<>(AddPropertyActivity.this, android.R.layout.simple_spinner_dropdown_item, listCategories);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
