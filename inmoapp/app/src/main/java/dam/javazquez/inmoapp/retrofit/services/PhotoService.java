@@ -19,7 +19,7 @@ public interface PhotoService {
     final String BASE_URL = "/photos";
 
     @GET(BASE_URL)
-    Call<ResponseContainer<PhotoResponse>> getAll();
+    Call<ResponseContainer<PhotoUploadResponse>> getAll();
 
     @GET(BASE_URL + "/{id}")
     Call<PhotoResponse> getOne(@Path("id") String id);
@@ -29,6 +29,6 @@ public interface PhotoService {
     Call<PhotoUploadResponse> upload(@Part MultipartBody.Part photo, @Part("propertyId")RequestBody propertyId);
 
     @DELETE(BASE_URL + "/{id}")
-    Call<PhotoResponse> delete(@Path("id") String id);
+    Call<PhotoUploadResponse> delete(@Path("id") String id);
 
 }

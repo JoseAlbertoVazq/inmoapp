@@ -6,17 +6,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -34,29 +34,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 import dam.javazquez.inmoapp.R;
-import dam.javazquez.inmoapp.dto.AddPropertyDto;
-import dam.javazquez.inmoapp.responses.PhotoResponse;
 import dam.javazquez.inmoapp.responses.PhotoUploadResponse;
 import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
 import dam.javazquez.inmoapp.responses.PropertyResponse;
 import dam.javazquez.inmoapp.responses.ResponseContainer;
-import dam.javazquez.inmoapp.responses.UserResponse;
 import dam.javazquez.inmoapp.retrofit.generator.AuthType;
 import dam.javazquez.inmoapp.retrofit.generator.ServiceGenerator;
 import dam.javazquez.inmoapp.retrofit.services.PhotoService;
 import dam.javazquez.inmoapp.retrofit.services.PropertyService;
-import dam.javazquez.inmoapp.retrofit.services.UserService;
-import dam.javazquez.inmoapp.util.App;
 import dam.javazquez.inmoapp.util.UtilToken;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
+    public static final int READ_REQUEST_CODE = 42;
+    private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
+    Map options = new HashMap();
+    Uri uriSelected;
+    String jwt, idUser;
     private ImageView photo, imageViewLeftArrow, imageViewRightArrow;
     private Context ctx;
     private PropertyResponse property;
@@ -66,12 +65,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     private GoogleMap gmap;
     private ImageButton deletePhoto;
     private FloatingActionButton addPhoto;
-    private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
-    Map options = new HashMap();
     private TextView title, description, price, size, room, zipcode, address, category, city;
-    public static final int READ_REQUEST_CODE = 42;
-    Uri uriSelected;
-    String jwt, idUser;
     private PhotoService servicePhoto;
 
 
@@ -162,19 +156,19 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
     public void deletePhoto() {
         servicePhoto = ServiceGenerator.createService(PhotoService.class);
-        Call<ResponseContainer<PhotoResponse>> callList = servicePhoto.getAll();
-        callList.enqueue(new Callback<ResponseContainer<PhotoResponse>>() {
+        Call<ResponseContainer<PhotoUploadResponse>> callList = servicePhoto.getAll();
+        callList.enqueue(new Callback<ResponseContainer<PhotoUploadResponse>>() {
             @Override
-            public void onResponse(Call<ResponseContainer<PhotoResponse>> call, Response<ResponseContainer<PhotoResponse>> response) {
+            public void onResponse(Call<ResponseContainer<PhotoUploadResponse>> call, Response<ResponseContainer<PhotoUploadResponse>> response) {
                 if (response.isSuccessful()) {
                     if (property.getPhotos().size() > 0) {
-                        for (PhotoResponse photo : response.body().getRows()) {
-                            if (photo.getImgurlink().equals(property.getPhotos().get(count))) {
+                        for (PhotoUploadResponse photo : response.body().getRows()) {
+                            if (photo.getImgurLink().equals(property.getPhotos().get(count))) {
                                 PhotoService servicePhotoDelete = ServiceGenerator.createService(PhotoService.class, jwt, AuthType.JWT);
-                                Call<PhotoResponse> callDelete = servicePhotoDelete.delete(photo.getId());
-                                callDelete.enqueue(new Callback<PhotoResponse>() {
+                                Call<PhotoUploadResponse> callDelete = servicePhotoDelete.delete(photo.getId());
+                                callDelete.enqueue(new Callback<PhotoUploadResponse>() {
                                     @Override
-                                    public void onResponse(Call<PhotoResponse> call, Response<PhotoResponse> response) {
+                                    public void onResponse(Call<PhotoUploadResponse> call, Response<PhotoUploadResponse> response) {
                                         if (response.isSuccessful()) {
                                             Toast.makeText(DetailsActivity.this, "Photo deleted", Toast.LENGTH_SHORT).show();
                                         } else {
@@ -184,7 +178,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
                                     }
 
                                     @Override
-                                    public void onFailure(Call<PhotoResponse> call, Throwable t) {
+                                    public void onFailure(Call<PhotoUploadResponse> call, Throwable t) {
                                         Toast.makeText(DetailsActivity.this, "Failure DELETE", Toast.LENGTH_SHORT).show();
 
                                     }
@@ -198,7 +192,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             }
 
             @Override
-            public void onFailure(Call<ResponseContainer<PhotoResponse>> call, Throwable t) {
+            public void onFailure(Call<ResponseContainer<PhotoUploadResponse>> call, Throwable t) {
                 Toast.makeText(DetailsActivity.this, "Failure GET", Toast.LENGTH_SHORT).show();
             }
         });
@@ -262,34 +256,39 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         startActivityForResult(intent, READ_REQUEST_CODE);
     }
 
-    public void changePictureRight() {
-        //count++;
-
-        Glide
-                .with(ctx)
-                .load(property.getPhotos().get(count))
-                .into(photo);
-
-        count++;
-        if (count >= property.getPhotos().size()) {
-            count = 0;
-        }
-
-
-    }
-
     public void changePictureLeft() {
-        //count--;
-
-        Glide
-                .with(ctx)
-                .load(property.getPhotos().get(count))
-                .into(photo);
+        ctx = this;
         count--;
         if (count < 0) {
             count = property.getPhotos().size() - 1;
         }
+        Glide
+                .with(ctx)
+                .load(property.getPhotos().get(count))
+                .apply(new RequestOptions()
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true))
+                .into(photo);
     }
+
+    public void changePictureRight() {
+        ctx = this;
+        if (count >= property.getPhotos().size() - 1) {
+            count = 0;
+        } else {
+            count++;
+        }
+        Glide
+                .with(ctx)
+                .load(property.getPhotos().get(count))
+                .apply(new RequestOptions()
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true))
+                .into(photo);
+
+
+    }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
