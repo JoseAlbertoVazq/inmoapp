@@ -52,11 +52,13 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
     PropertyService service;
     UserService serviceU;
     UserResponse me;
+    private int favCode = 0;
 
-    public PropertyAdapter(Context ctx, List<PropertyResponse> items, OnListFragmentInteractionListener listener) {
+    public PropertyAdapter(int fav,Context ctx, List<PropertyResponse> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
         contexto = ctx;
+        favCode = fav;
     }
 
     @Override
@@ -108,7 +110,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
                 dialog.show();
             } else {
 
-                if (!holder.mItem.isFav()) {
+                if (favCode == 0) {
                     service = ServiceGenerator.createService(PropertyService.class, jwt, AuthType.JWT);
 
                     Call<UserFavResponse> call = service.addFav(holder.mItem.getId());
@@ -121,7 +123,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
                                 Toast.makeText(contexto, "Added to favourites", Toast.LENGTH_LONG).show();
                                 holder.mItem.setFav(true);
                                 holder.fav.setImageResource(R.drawable.ic_fav);
-                                refreshList(holder);
+                           //     refreshList(holder);
                             }
                         }
 
@@ -143,7 +145,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
                                 Toast.makeText(contexto, "Deleted from favourites", Toast.LENGTH_LONG).show();
                                 holder.mItem.setFav(false);
                                 holder.fav.setImageResource(R.drawable.ic_no_fav);
-                                refreshList(holder);
+                            //    refreshList(holder);
                             }
                         }
 
@@ -182,7 +184,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.ViewHo
 
     public void refreshList(ViewHolder holder) {
         AppCompatActivity activity = (AppCompatActivity) contexto;
-        Fragment myFragment = new PropertyFavFragment();
+        Fragment myFragment = new PropertyFragment();
         activity.getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_dashboard, myFragment).addToBackStack(null).commit();
     }
 

@@ -56,6 +56,7 @@ public class PropertyFragment extends Fragment {
     PropertyAdapter adapter;
     Map<String, String> options = new HashMap<>();
     FusedLocationProviderClient fusedLocationClient;
+    private static final int NO_FAV_CODE = 0;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -101,6 +102,7 @@ public class PropertyFragment extends Fragment {
             jwt = UtilToken.getToken(view.getContext());
             options.put("near", "-6.0071807999999995,37.3803677");
             options.put("max_distance","1000000000000");
+            options.put("min_distance","1");
             RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -121,7 +123,7 @@ public class PropertyFragment extends Fragment {
                         } else {
                             properties = response.body().getRows();
 
-                            adapter = new PropertyAdapter(context, properties, mListener);
+                            adapter = new PropertyAdapter(NO_FAV_CODE, context, properties, mListener);
                             recyclerView.setAdapter(adapter);
 
                         }
@@ -146,7 +148,7 @@ public class PropertyFragment extends Fragment {
                         } else {
                             properties = response.body().getRows();
 
-                            adapter = new PropertyAdapter(context, properties, mListener);
+                            adapter = new PropertyAdapter(NO_FAV_CODE,context, properties, mListener);
                             recyclerView.setAdapter(adapter);
 
                         }

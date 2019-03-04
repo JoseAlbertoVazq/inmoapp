@@ -186,51 +186,23 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
         max_size = dialogLayout.findViewById(R.id.search_max_size);
         builder.setPositiveButton(R.string.ok, (dialog, which) -> {
             if(frag == 0){
-/*                if(rooms.getText().toString() == null) {
-                    rooms.setText("");
-                } else if (city.getText().toString() == null){
-                    city.setText("");
-                } else if (province.getText().toString() == null){
-                    province.setText("");
-                } else if(zipcode.getText().toString() == null) {
-                    zipcode.setText("");
-                } else if (address.getText().toString() == null) {
-                    zipcode.setText("");
-                } else if (min_price.getText().toString() == null){
-                    address.setText("");
-                } else if(max_price.getText().toString() == null) {
-                    max_price.setText("");
-                } else if (min_size.getText().toString() == null) {
-                    min_size.setText("");
-                } else if (max_size.getText().toString() == null){
-                    max_size.setText("");
-                }*/
-/*                options.put("rooms", rooms.getText().toString());
-                options.put("city", city.getText().toString());
-                options.put("province", province.getText().toString());
-                options.put("zipcode", zipcode.getText().toString());
-                options.put("address", address.getText().toString());
-                options.put("min_price", min_price.getText().toString());
-                options.put("max_price", max_price.getText().toString());
-                options.put("min_size", min_size.getText().toString());
-                options.put("max_size", max_size.getText().toString());*/
-                if(rooms.getText().toString()!=""){
+                if(!rooms.getText().toString().equals("")){
                     options.put("rooms", rooms.getText().toString());
-                } else if(city.getText().toString()!=""){
+                } if(!city.getText().toString().equals("")){
                     options.put("city", city.getText().toString());
-                } else if (province.getText().toString()!="") {
+                } if (!province.getText().toString().equals("")) {
                     options.put("province", province.getText().toString());
-                } else if (zipcode.getText().toString()!= ""){
+                } if (!zipcode.getText().toString().equals("")){
                     options.put("zipcode", zipcode.getText().toString());
-                } else if (address.getText().toString()!= ""){
+                } if (!address.getText().toString().equals("")){
                     options.put("address", address.getText().toString());
-                } else if (min_price.getText().toString() != "") {
+                } if (!min_price.getText().toString().equals("")) {
                     options.put("min_price", min_price.getText().toString());
-                } else if (max_price.getText().toString()!=""){
+                } if (!max_price.getText().toString().equals("")){
                     options.put("max_price", max_price.getText().toString());
-                } else if(min_size.getText().toString() != "") {
+                } if(!min_size.getText().toString().equals("")) {
                     options.put("min_size", min_size.getText().toString());
-                } else if(max_size.getText().toString()!= ""){
+                } if(!max_size.getText().toString().equals("")){
                     options.put("max_size", max_size.getText().toString());
                 }
                 System.out.println(options.values());

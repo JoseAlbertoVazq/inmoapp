@@ -52,6 +52,7 @@ public class PropertyFavFragment extends Fragment {
     String jwt;
     PropertyService service;
     PropertyAdapter adapter;
+    private static final int FAV_CODE = 1;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -109,7 +110,7 @@ public class PropertyFavFragment extends Fragment {
                     } else {
                         properties = response.body().getRows();
 
-                        adapter = new PropertyAdapter(context, properties, mListener);
+                        adapter = new PropertyAdapter(FAV_CODE, context, properties, mListener);
                         recyclerView.setAdapter(adapter);
 
                     }
