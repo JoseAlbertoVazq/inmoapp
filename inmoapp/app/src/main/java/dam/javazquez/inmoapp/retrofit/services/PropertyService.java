@@ -8,6 +8,7 @@ import dam.javazquez.inmoapp.responses.PropertyFavsResponse;
 import dam.javazquez.inmoapp.responses.PropertyResponse;
 import dam.javazquez.inmoapp.responses.ResponseContainer;
 import dam.javazquez.inmoapp.responses.ResponseContainerOneRow;
+import dam.javazquez.inmoapp.responses.UserFavResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -43,7 +44,7 @@ public interface PropertyService {
     Call<AddPropertyDto> create (@Body AddPropertyDto property);
 
     @POST(BASE_URL+"/fav/{id}")
-    Call<PropertyResponse> addFav (@Path("id") String id);
+    Call<UserFavResponse> addFav (@Path("id") String id);
 
     @PUT(BASE_URL + "/{id}")
     Call<EditPropertyDto> edit(@Path("id") String id, @Body EditPropertyDto edited);
@@ -52,5 +53,5 @@ public interface PropertyService {
     Call<PropertyFavsResponse> delete(@Path("id") String id);
 
     @DELETE(BASE_URL + "/fav/{id}")
-    Call<PropertyResponse> deleteFav(@Path("id") String id);
+    Call<UserFavResponse> deleteFav(@Path("id") String id);
 }

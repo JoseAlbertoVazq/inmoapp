@@ -167,31 +167,32 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             @Override
             public void onResponse(Call<ResponseContainer<PhotoResponse>> call, Response<ResponseContainer<PhotoResponse>> response) {
                 if (response.isSuccessful()) {
+                    if (property.getPhotos().size() > 0) {
+                        for (PhotoResponse photo : response.body().getRows()) {
+                            if (photo.getImgurlink().equals(property.getPhotos().get(count))) {
+                                PhotoService servicePhotoDelete = ServiceGenerator.createService(PhotoService.class, jwt, AuthType.JWT);
+                                Call<PhotoResponse> callDelete = servicePhotoDelete.delete(photo.getId());
+                                callDelete.enqueue(new Callback<PhotoResponse>() {
+                                    @Override
+                                    public void onResponse(Call<PhotoResponse> call, Response<PhotoResponse> response) {
+                                        if (response.isSuccessful()) {
+                                            Toast.makeText(DetailsActivity.this, "Photo deleted", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(DetailsActivity.this, "no is.Successful DELETE", Toast.LENGTH_SHORT).show();
 
-                    for (PhotoResponse photo : response.body().getRows()) {
-                        if (photo.getImgurlink().equals(property.getPhotos().get(count))) {
-                            PhotoService servicePhotoDelete = ServiceGenerator.createService(PhotoService.class, jwt, AuthType.JWT);
-                            Call<PhotoResponse> callDelete = servicePhotoDelete.delete(photo.getId());
-                            callDelete.enqueue(new Callback<PhotoResponse>() {
-                                @Override
-                                public void onResponse(Call<PhotoResponse> call, Response<PhotoResponse> response) {
-                                    if (response.isSuccessful()) {
-                                        Toast.makeText(DetailsActivity.this, "Photo deleted", Toast.LENGTH_SHORT).show();
-                                    }else {
-                                        Toast.makeText(DetailsActivity.this, "no is.Successful DELETE", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<PhotoResponse> call, Throwable t) {
+                                        Toast.makeText(DetailsActivity.this, "Failure DELETE", Toast.LENGTH_SHORT).show();
 
                                     }
-                                }
-
-                                @Override
-                                public void onFailure(Call<PhotoResponse> call, Throwable t) {
-                                    Toast.makeText(DetailsActivity.this, "Failure DELETE", Toast.LENGTH_SHORT).show();
-
-                                }
-                            });
+                                });
+                            }
                         }
                     }
-                }else {
+                } else {
                     Toast.makeText(DetailsActivity.this, "no is.Successful GET", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -422,19 +423,19 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
      * ha publicado, para que si lo es, enseñe los botones de añadir y eliminar fotos al inmueble, y si no lo es
      * que no pueda hacerlo
      */
-    public void checkOwnerPhotos(){
+    public void checkOwnerPhotos() {
         service = ServiceGenerator.createService(PropertyService.class, jwt, AuthType.JWT);
         Call<ResponseContainer<PropertyFavsResponse>> callProp = service.getMine();
         callProp.enqueue(new Callback<ResponseContainer<PropertyFavsResponse>>() {
             @Override
             public void onResponse(Call<ResponseContainer<PropertyFavsResponse>> call, Response<ResponseContainer<PropertyFavsResponse>> response) {
-                if(response.isSuccessful()){
-                    for(PropertyFavsResponse propertyMine : response.body().getRows()){
+                if (response.isSuccessful()) {
+                    for (PropertyFavsResponse propertyMine : response.body().getRows()) {
                         System.out.println(propertyMine.getId());
                         System.out.println(property.getId());
-                        if(propertyMine.getId().equals(property.getId())){
+                        if (propertyMine.getId().equals(property.getId())) {
                             Log.d("ok", "ok");
-                        }else{
+                        } else {
                             /*addPhoto.setImageDrawable(null);
                             deletePhoto.setImageDrawable(null);*/
                         }

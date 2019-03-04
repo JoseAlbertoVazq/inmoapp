@@ -21,11 +21,12 @@ public class PropertyResponse implements Serializable {
     private String loc;
     private List<String> favs = new ArrayList<>();
     private List<String> photos = new ArrayList<>();
+    private boolean isFav;
     public PropertyResponse() {
 
     }
 
-    public PropertyResponse(String id, UserResponse ownerId, String title, String description, Long price, Long rooms, Long size, CategoryResponse categoryId, String address, String zipcode, String city, String province, String loc, List<String> favs, List<String> photos) {
+    public PropertyResponse(String id, UserResponse ownerId, String title, String description, Long price, Long rooms, Long size, CategoryResponse categoryId, String address, String zipcode, String city, String province, String loc, List<String> favs, List<String> photos, boolean isFav) {
         this.id = id;
         this.ownerId = ownerId;
         this.title = title;
@@ -41,6 +42,7 @@ public class PropertyResponse implements Serializable {
         this.loc = loc;
         this.favs = favs;
         this.photos = photos;
+        this.isFav = isFav;
     }
 
     public String getId() {
@@ -161,5 +163,13 @@ public class PropertyResponse implements Serializable {
 
     public void setFavs(List<String> favs) {
         this.favs = favs;
+    }
+
+    public boolean isFav() {
+        return isFav;
+    }
+
+    public void setFav(boolean fav) {
+        isFav = fav;
     }
 }

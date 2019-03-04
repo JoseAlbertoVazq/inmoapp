@@ -19,6 +19,7 @@ public class PropertyFavsResponse implements Serializable {
     private String province;
     private String loc;
     private List<String> photos = new ArrayList<>();
+    private boolean isFav;
     public PropertyFavsResponse() {
 
     }
@@ -150,5 +151,13 @@ public class PropertyFavsResponse implements Serializable {
 
     public void setPhotos(List<String> photos) {
         this.photos = photos;
+    }
+
+    public boolean isFav() {
+        return isFav;
+    }
+
+    public void setFav(boolean fav) {
+        isFav = fav;
     }
 }

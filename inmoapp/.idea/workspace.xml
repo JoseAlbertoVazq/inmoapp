@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="9db09d1d-8b99-40b9-829d-ba64ff9196e5" name="Default Changelist" comment="">
+    <list default="true" id="021b4530-dfa6-445a-b618-cc935a0da0b5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/responses/UserFavResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -12,7 +18,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/responses/PropertyFavsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/responses/PropertyFavsResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/responses/PropertyResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/responses/PropertyResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/retrofit/services/PropertyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/retrofit/services/PropertyService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/ui/details/DetailsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/ui/details/DetailsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/ui/favs/PropertyFavAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/ui/properties/PropertyAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/ui/properties/PropertyAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_propertyfav.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_propertyfav.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,11 +41,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/ui/properties/PropertyAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="139" column="56" selection-start-line="139" selection-start-column="56" selection-end-line="139" selection-end-column="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/ui/details/DetailsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="234" column="65" selection-start-line="234" selection-start-column="65" selection-end-line="234" selection-end-column="65" />
+            <state relative-caret-position="570">
+              <caret line="200" column="29" selection-start-line="200" selection-start-column="29" selection-end-line="200" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -46,6 +67,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/ui/properties/PropertyAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/responses/PropertyResponse.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/ui/details/DetailsActivity.java" />
       </list>
     </option>
@@ -62,6 +85,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -85,6 +109,13 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="inmoapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="responses" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="inmoapp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="inmoapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -95,13 +126,27 @@
               <item name="ui" type="462c0819:PsiDirectoryNode" />
               <item name="details" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="inmoapp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="inmoapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="properties" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="inmoapp" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="inmoapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -183,18 +228,22 @@
       </method>
     </configuration>
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9db09d1d-8b99-40b9-829d-ba64ff9196e5" name="Default Changelist" comment="" />
-      <created>1551623074645</created>
+      <changelist id="021b4530-dfa6-445a-b618-cc935a0da0b5" name="Default Changelist" comment="" />
+      <created>1551688172229</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1551623074645</updated>
+      <updated>1551688172229</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" visible="true" weight="0.32954547" />
       <window_info id="Structure" side_tool="true" />
@@ -205,12 +254,12 @@
       <window_info id="Capture Tool" />
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Run" visible="true" weight="0.3289256" />
+      <window_info anchor="bottom" id="Run" weight="0.3289256" />
       <window_info anchor="bottom" id="Logcat" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="TODO" />
       <window_info anchor="bottom" id="Android Profiler" />
-      <window_info anchor="bottom" id="Debug" />
+      <window_info active="true" anchor="bottom" id="Debug" visible="true" weight="0.3289256" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Build" weight="0.3294893" />
@@ -221,11 +270,69 @@
       <window_info anchor="right" id="Palette&#9;" />
     </layout>
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/ui/details/DetailsActivity.java</url>
+          <line>163</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/responses/PropertyFavsResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/responses/PropertyResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="28" column="289" selection-start-line="28" selection-start-column="289" selection-end-line="28" selection-end-column="289" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/ui/properties/PropertyAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="139" column="56" selection-start-line="139" selection-start-column="56" selection-end-line="139" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Android/Sdk/sources/android-28/android/os/Looper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="166" selection-start-line="166" selection-end-line="166" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Android/Sdk/sources/android-28/android/os/Handler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="92" selection-start-line="92" selection-end-line="92" />
+          <folding>
+            <element signature="e#31371#31372#0" expanded="true" />
+            <element signature="e#31426#31427#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Android/Sdk/sources/android-28/android/view/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="22296" selection-start-line="22296" selection-end-line="22296" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/dam/javazquez/inmoapp/ui/details/DetailsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="234" column="65" selection-start-line="234" selection-start-column="65" selection-end-line="234" selection-end-column="65" />
+        <state relative-caret-position="570">
+          <caret line="200" column="29" selection-start-line="200" selection-start-column="29" selection-end-line="200" selection-end-column="29" />
         </state>
       </provider>
     </entry>
