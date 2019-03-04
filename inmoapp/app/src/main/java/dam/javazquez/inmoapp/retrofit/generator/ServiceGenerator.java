@@ -13,10 +13,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
-    private static final String BASE_URL = /*"https://sleepy-ravine-40263.herokuapp.com"*/"https://realstatev2.herokuapp.com";
+    private static final String BASE_URL = "https://sleepy-ravine-40263.herokuapp.com";
     //https://realstatev2.herokuapp.com
     //hzasFUC4txHXVHHWvjkR2R7UxQ6kzBlw
-    public static String MASTER_KEY = /*"masterKey"*/ "hzasFUC4txHXVHHWvjkR2R7UxQ6kzBlw";
+    public static String MASTER_KEY = "masterKey";
 
     // Solución temporal
     public static String jwtToken = null;

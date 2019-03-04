@@ -29,7 +29,7 @@ public interface PropertyService {
     Call<ResponseContainer<PropertyResponse>> listPropertiesAuth(@QueryMap Map<String, String> options);
 
     @GET(BASE_URL)
-    Call<ResponseContainer<PropertyResponse>> listGeo(@Query("near") String near);
+    Call<ResponseContainer<PropertyResponse>> listGeo(@QueryMap Map<String, String> options);
 
     @GET(BASE_URL + "/mine")
     Call<ResponseContainer<PropertyFavsResponse>> getMine();

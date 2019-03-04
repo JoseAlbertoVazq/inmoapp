@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -148,7 +149,9 @@ public class DashboardActivity extends AppCompatActivity implements PropertyFrag
 
         search.setOnClickListener(v -> searchOptions());
         map.setOnClickListener(v -> {
-            startActivity(new Intent(DashboardActivity.this, MapsActivity.class));
+            Intent map = new Intent(DashboardActivity.this, MapsActivity.class);
+            map.putExtra("options", (Serializable) options);
+            startActivity(map);
         });
     }
 

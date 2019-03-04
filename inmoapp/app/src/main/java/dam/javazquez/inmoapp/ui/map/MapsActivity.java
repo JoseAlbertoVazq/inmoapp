@@ -2,6 +2,7 @@ package dam.javazquez.inmoapp.ui.map;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -19,6 +20,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import dam.javazquez.inmoapp.R;
 import dam.javazquez.inmoapp.responses.PropertyResponse;
 import dam.javazquez.inmoapp.responses.ResponseContainer;
@@ -33,7 +37,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     FusedLocationProviderClient fusedLocationClient;
     private GoogleMap mMap;
     private PropertyService service;
-
+    private Map options = new HashMap();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +47,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
+        Intent i = getIntent();
+        options = (Map) i.getSerializableExtra("options");
     }
 
 
@@ -59,13 +64,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
         LatLng latlng = new LatLng(37.3803677,-6.0071807999999995);
   /*      // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
         service = ServiceGenerator.createService(PropertyService.class);
-        Call<ResponseContainer<PropertyResponse>> callGeo = service.listGeo("-6.0071807999999995,37.3803677");
+        Call<ResponseContainer<PropertyResponse>> callGeo = service.listGeo(options);
         callGeo.enqueue(new Callback<ResponseContainer<PropertyResponse>>() {
             @Override
             public void onResponse(Call<ResponseContainer<PropertyResponse>> call, Response<ResponseContainer<PropertyResponse>> response) {
